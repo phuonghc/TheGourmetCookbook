@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.HomeController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Button layoutX="143.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="79.0" prefWidth="87.0" text="Login" />
+    <Button layoutX="333.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="79.0" prefWidth="87.0" text="Search" />
+    <Label layoutX="255.0" layoutY="106.0" text="HOME" />
+  </children>
+</AnchorPane>

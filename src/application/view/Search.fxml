@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.SearchController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="201.0" layoutY="301.0" onAction="#addIncluded" opacity="1.0" prefHeight="21.0" prefWidth="200.0" promptText="Include" visible="true">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField id="textField" fx:id="includeTextField" layoutX="201.0" layoutY="279.0" onKeyPressed="#onIncludeEvent" prefWidth="200.0" promptText="Include" text="" />
+    <TextField fx:id="excludeTextField" layoutX="200.0" layoutY="348.0" onKeyPressed="#onExcludeEvent" prefWidth="200.0" promptText="Exclude" text="" />
+    <ComboBox id="excludeBox" fx:id="excludeComboBox" layoutX="217.0" layoutY="371.0" onAction="#addExcluded" promptText="exclude">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField id="categorySearch" fx:id="categoryTextField" layoutX="200.0" layoutY="111.0" onKeyPressed="#onCategoryEvent" prefWidth="200.0" promptText="Category" text="" />
+    <TextField fx:id="calorieMinTextField" layoutX="174.0" layoutY="454.0" prefWidth="90.0" promptText="Calorie Min" text="" />
+    <TextField fx:id="calorieMaxTextField" layoutX="297.0" layoutY="454.0" prefWidth="200.0" promptText="Calorie Max" text="" />
+    <CheckBox fx:id="vegetarianCheckBox" layoutX="182.0" layoutY="511.0" mnemonicParsing="false" text="Vegetarian" />
+    <CheckBox fx:id="veganCheckBox" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" text="Vegan" />
+    <Button fx:id="searchButton" layoutX="497.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleMenu" text="MENU" />
+    <ComboBox fx:id="categoryComboBox" layoutX="224.0" layoutY="134.0" onAction="#setCategory" prefHeight="21.0" prefWidth="177.0" promptText="Category">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox fx:id="cuisineComboBox" layoutX="189.0" layoutY="193.0" promptText="Cuisine">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox fx:id="courseComboBox" layoutX="321.0" layoutY="194.0" promptText="Course">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Button layoutX="47.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleHome" text="HOME" />
+  </children>
+</AnchorPane>
