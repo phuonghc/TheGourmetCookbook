@@ -3,7 +3,7 @@ List of things todo
 1) SearchController: ComboBoxes are prepopulated with generic "item1, item2, item3". Change code so that comboBoxes are empty until populated with returned matching results from Spoonacular.loadIngredients().
 Programmer: Harrison Luko
 Assigned Date: 4/2/2019
-Due Date: 4/5/2019
+Due Date: 4/3/2019
 Completion Date:
 
 2) RecipeController: Load appropriate recipe information, with formatting of instructions and ingredients.
