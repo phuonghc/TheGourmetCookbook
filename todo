@@ -1,0 +1,31 @@
+List of things todo
+
+1) SearchController: ComboBoxes are prepopulated with generic "item1, item2, item3". Change code so that comboBoxes are empty until populated with returned matching results from Spoonacular.loadIngredients().
+Programmer: Harrison Luko
+Assigned Date: 4/2/2019
+Due Date: 4/5/2019
+Completion Date:
+
+2) RecipeController: Load appropriate recipe information, with formatting of instructions and ingredients.
+
+3) RecipeController: Allow user to input the desired servings. And adjust the instructions/ingredients to reflect that desired amount.
+
+4) MenuController: Download and display each menuitems image.
+
+5) SearchController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+6) MenuController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+7) RecipeController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+8) LoginController: Add 2 textfields for the username to enter their username and password. Add a button to login which verifies user login of username and password. Create text file which includes all usernames and passwords.
+
+9) CreateAccountController: Add button for user to create new account on the Login.fxml, make sure to update the loginController. Build 2 new java classes CreateAccount.fxml and CreateAccountController.java. This view will prompt the user for a password and username. Upon completion it will update the text file which contains usernames and passwords. And will also create a new text file which saves user information.
+
+10) UserController: Create a new model class with user information. Add fxml items to User.fxml to display user information, previous searches and favorite recipes. 
+
+11) LoginController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+12) CreateAccountController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
