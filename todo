@@ -29,3 +29,5 @@ Completion Date:
 12) CreateAccountController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+
+14) MenuController: Error messages when going previous from 1, and next from last possible page.
