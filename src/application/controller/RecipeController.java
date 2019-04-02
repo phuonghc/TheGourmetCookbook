@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -32,6 +33,18 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	private TextArea ingredientsText;
 	@FXML
 	private TextArea instructionsText;
+	@FXML
+	private Button buttonPrevious;
+	@FXML
+	private Button buttonLogout;
+	@FXML
+	private TextArea txtRecipeIngredients;
+	@FXML
+	private TextArea txtRecipeDirections;
+	@FXML
+	private ImageView imgRecipe;
+	@FXML 
+	private Label labelRecipeName;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -46,7 +59,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		title.setText(recipe.getTitle());
 	}
 
-	public void handleMenu(ActionEvent event) {
+	public void handlePrevious(ActionEvent event) {
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
@@ -57,7 +70,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		}
 	}
 	
-	public void handleHome(ActionEvent event) {
+	public void handleLogout(ActionEvent event) {
 			
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
@@ -67,7 +80,26 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 				e.printStackTrace();
 			}
 		}
-	
+	/*
+	public void popImg() { //Populate ImageView with Recipe img
+		Image newRecipeImage = new Image("");
+		imgRecipe.setImage(newRecipeImage);
+	}
+	public void popTxtIngredients() { //Populate TextArea with Ingredients required
+		String recipeName = new String( "Ingredients Required: \n from function goes here.");
+		txtRecipeIngredients.setText( recipeName);
+		txtRecipeIngredients.setEditable(false);
+	}
+	public void popTxtInstructions() { //Populate TextArea with Instructions required
+		String recipeName = new String( "Directions: /n from function goes here.");
+		txtRecipeDirections.setText( recipeName);
+		txtRecipeDirections.setEditable(false);
+	}
+	public void popLabelRecipeName() { //Populate Label with Recipe Name
+		String recipeName = new String( "Recipe name from function goes here.");
+		labelRecipeName.setText( recipeName);
+	}
+	*/
 	@Override
 	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
