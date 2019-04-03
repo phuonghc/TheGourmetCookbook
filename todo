@@ -74,5 +74,9 @@ Assigned Date: 4/2/2019
 Due Date: 4/2/2019
 Completion Date: 4/2/2019
 
+16) SearchController: Check for results, (No results loads Menu page with infinite pagination)
+
+17) SearchController: Add in option for number of choices presented in Menu items from search
+
 
 
