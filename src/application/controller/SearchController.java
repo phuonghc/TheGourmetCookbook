@@ -77,7 +77,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		if(Spoonacular.included.size()>0) {
 			search += "&includeIngredients=";
 			for(int i=0; i < Spoonacular.included.size(); i++) {
-				String includes = Spoonacular.excluded.get(i);
+				String includes = Spoonacular.included.get(i);
 				includes.replaceAll(" ", "+");
 				search += includes + "%2c+";
 			}
