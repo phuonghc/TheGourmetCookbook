@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.HomeController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HomeController">
   <!-- TODO Add Nodes -->
   <children>
-    <Button layoutX="143.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="79.0" prefWidth="87.0" text="Login" />
-    <Button layoutX="333.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="79.0" prefWidth="87.0" text="Search" />
-    <Label layoutX="255.0" layoutY="106.0" text="HOME" />
+      <Pane prefHeight="800.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/Flat-Pack-Kitchen-Ranges_main%20kitchen.jpg" />
+               </image>
+            </ImageView>
+          <Button fx:id="LoginButton" layoutX="246.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="80.0" prefWidth="100.0" style="-fx-background-color: #000000;" text="Login" textFill="WHITE" />
+          <Button fx:id="SearchButton" layoutX="431.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: #000000;" text="Search" textFill="WHITE" />
+          <Label fx:id="MainTitleLabel" layoutX="120.0" layoutY="156.0" style="-fx-background-color: #000000;" text="The Gourment Cookbook" textFill="WHITE">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
   </children>
 </AnchorPane>

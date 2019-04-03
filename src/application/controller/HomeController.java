@@ -1,14 +1,31 @@
 package application.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
-public class HomeController implements EventHandler<ActionEvent> {
+public class HomeController implements Initializable, EventHandler<ActionEvent>  {
+	
+	@FXML
+    private Label MainTitleLabel;
+
+    @FXML
+    private Button SearchButton;
+
+    @FXML
+    private Button LoginButton;
+
 
 	@FXML
 	void handleLogin(ActionEvent event) {
@@ -38,6 +55,12 @@ public class HomeController implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 50));
 		
 	}
 }
