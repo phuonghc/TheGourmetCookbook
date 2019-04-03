@@ -42,4 +42,6 @@ Completion Date:
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
-14) MenuController: Error messages when going previous from 1, and next from last possible page.
+14) MenuController: Error message when going from menu page to recipe without selecting a menu item from the radio buttons.
+
+15) SearchController: Don't let user search without an input. 
