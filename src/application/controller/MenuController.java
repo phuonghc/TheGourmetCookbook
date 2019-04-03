@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.RadioButton;
@@ -46,6 +48,7 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			menu = Spoonacular.loadMenu();
 			itemsPerPage = 3;
 			toggleGroup = new ToggleGroup();
+			Spoonacular.recipeSearch = null;
 		} catch (UnirestException | IOException exception) {
 			exception.printStackTrace();
 		}
@@ -86,7 +89,14 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 	
 	@FXML
 	public void handleRecipe(ActionEvent event) {
-		System.out.println("toggleGroup.getSelectedToggle().getUserData(): " + toggleGroup.getSelectedToggle().getUserData());
+		if(toggleGroup.getSelectedToggle() == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Alert");
+	        alert.setHeaderText("Input Error!");
+	        alert.setContentText("Please select an item.");
+	        alert.showAndWait();
+			return;
+		}
 		Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + toggleGroup.getSelectedToggle().getUserData() + "/information";
 
 		try {
