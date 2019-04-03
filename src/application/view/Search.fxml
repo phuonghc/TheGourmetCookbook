@@ -13,9 +13,6 @@
     <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="201.0" layoutY="301.0" onAction="#addIncluded" opacity="1.0" prefHeight="21.0" prefWidth="200.0" promptText="Include" visible="true">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
         </FXCollections>
       </items>
     </ComboBox>
@@ -24,9 +21,6 @@
     <ComboBox id="excludeBox" fx:id="excludeComboBox" layoutX="217.0" layoutY="371.0" onAction="#addExcluded" promptText="exclude">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
         </FXCollections>
       </items>
     </ComboBox>
@@ -39,27 +33,18 @@
     <ComboBox fx:id="categoryComboBox" layoutX="224.0" layoutY="134.0" onAction="#setCategory" prefHeight="21.0" prefWidth="177.0" promptText="Category">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
         </FXCollections>
       </items>
     </ComboBox>
     <ComboBox fx:id="cuisineComboBox" layoutX="189.0" layoutY="193.0" promptText="Cuisine">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
         </FXCollections>
       </items>
     </ComboBox>
     <ComboBox fx:id="courseComboBox" layoutX="321.0" layoutY="194.0" promptText="Course">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
         </FXCollections>
       </items>
     </ComboBox>

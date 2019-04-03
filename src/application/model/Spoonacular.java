@@ -84,6 +84,8 @@ public class Spoonacular {
 		String parse = response.getBody().toString(); 
 		Recipe recipe = objectMapper.readValue(parse, Recipe.class);
 		
+		System.out.println(recipe.getTitle());
+		
 		//System.out.println(parse);
 		
 		//for(int i = 0; i <recipe.getExtendedIngredients().size(); i++) {

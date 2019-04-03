@@ -56,7 +56,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			e.printStackTrace();
 		}
 		
-		title.setText(recipe.getTitle());
+		//title.setText(recipe.getTitle());
 	}
 
 	public void handlePrevious(ActionEvent event) {
