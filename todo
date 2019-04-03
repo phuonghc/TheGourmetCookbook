@@ -11,6 +11,10 @@ Completion Date:
 3) RecipeController: Allow user to input the desired servings. And adjust the instructions/ingredients to reflect that desired amount.
 
 4) MenuController: Download and display each menuitems image.
+Programmer: Sayontani Ray
+Assigned Date: 4/2/2019
+Due Date: 4/4/2019
+Completion Date:
 
 5) SearchController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 Programmer: Phuong
@@ -19,6 +23,10 @@ Due Date: 4/8/2019
 Completion Date:
     
 6) MenuController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+Programmer: Sayontani Ray
+Assigned Date: 4/2/2019
+Due Date: 4/7/2019
+Completion Date:
 
 7) RecipeController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
@@ -50,10 +58,16 @@ Completion Date:
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
+
 14) MenuController: Error messages when going previous from 1, and next from last possible page.
 
-15) HomeControllet: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+15) MenuController: Error message when going from menu page to recipe without selecting a menu item from the radio buttons.
+
+16) SearchController: Don't let user search without an input. 
+
+17) HomeControllet: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 Programmer: Marco
 Assigned Date: 4/2/2019
 Due Date: 4/2/2019
 Completion Date: 4/2/2019
+

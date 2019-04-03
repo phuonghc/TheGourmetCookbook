@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import application.Main;
 import application.model.Menu;
+import application.model.MenuItem;
 import application.model.Spoonacular;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,52 +17,88 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 public class MenuController implements EventHandler<ActionEvent>, Initializable {
+	
+	@FXML
+	private GridPane resultPane;
 
 	@FXML
-	private ImageView image1;
-	@FXML
-	private ImageView image2;
-	@FXML
-	private ImageView image3;;
-	@FXML
-	private CheckBox checkBox1;
-	@FXML
-	private CheckBox checkBox2;
-	@FXML
-	private CheckBox checkBox3;
-	@FXML
-	private Label pageNumber;
+	private Pagination resultsPagination;
+
+	private Menu menu;
+
+	private int itemsPerPage;
 	
+	private ToggleGroup toggleGroup;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		//Populate the scene with the Menu
 		try {
-			createMenu();
-		} catch (UnirestException | IOException e) {
-			e.printStackTrace();
+			menu = Spoonacular.loadMenu();
+			itemsPerPage = 3;
+			toggleGroup = new ToggleGroup();
+			Spoonacular.recipeSearch = null;
+		} catch (UnirestException | IOException exception) {
+			exception.printStackTrace();
 		}
+
+		resultsPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
+		resultsPagination.setPageFactory((Integer pageIndex) -> createMenu(pageIndex));
 	}
 
+	public GridPane createMenu(int pageIndex) {
+		resultPane = new GridPane();
+		int page = pageIndex * itemsPerPage;
+		int rowIndex = 0;
+		
+		for (int i = page; i < page + itemsPerPage && i < menu.getResults().size(); i++) {
+			MenuItem result = menu.getResults().get(i);
+			
+			RadioButton radioButton = new RadioButton();
+			radioButton.setToggleGroup(toggleGroup);
+			radioButton.setUserData(result.getId());
+			resultPane.add(radioButton, 0, rowIndex);
+
+			Image image = new Image(result.getImage());
+			ImageView imageView = new ImageView();
+			imageView.setFitWidth(50);
+			imageView.setFitHeight(50);
+			imageView.setPreserveRatio(true);
+			imageView.setImage(image);
+			resultPane.add(imageView, 1, rowIndex);
+
+			Label label = new Label();
+			label.setText(result.getTitle());
+			resultPane.add(label, 2, rowIndex);
+
+			rowIndex++;
+		}
+		return resultPane;
+	}
+	
+	@FXML
 	public void handleRecipe(ActionEvent event) {
-		
-		if(checkBox1.isSelected()) {
-			Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + Spoonacular.id[0] + "/information";
+		if(toggleGroup.getSelectedToggle() == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Alert");
+	        alert.setHeaderText("Input Error!");
+	        alert.setContentText("Please select an item.");
+	        alert.showAndWait();
+			return;
 		}
-		
-		if(checkBox2.isSelected()) {
-			Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + Spoonacular.id[1] + "/information";
-		}
-		
-		if(checkBox3.isSelected()) {
-			Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + Spoonacular.id[2] + "/information";
-		}
-		
+		Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + toggleGroup.getSelectedToggle().getUserData() + "/information";
+
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Recipe.fxml"));
 			Main.stage.setScene(new Scene(root, 700, 850));
@@ -72,9 +107,10 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			e.printStackTrace();
 		}
 	}
-	
+
+	@FXML
 	public void handleSearch(ActionEvent event) {
-		
+
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Search.fxml"));
 			Main.stage.setScene(new Scene(root, 700, 850));
@@ -83,44 +119,11 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			e.printStackTrace();
 		}
 	}
-	
-	private void createMenu() throws UnirestException, JsonParseException, JsonMappingException, IOException {
-		Menu menu = Spoonacular.loadMenu();
-		int i = Integer.parseInt(pageNumber.getText());
-		
-		checkBox1.setText(menu.getResults().get(((i-1)*3)).getTitle());
-		Image loadImage1 = new Image(menu.getResults().get(((i-1)*3)).getImage());
-		image1.setImage(loadImage1);
-		Spoonacular.id[0] = menu.getResults().get(((i-1)*3)).getId();
-		
-		checkBox2.setText(menu.getResults().get(((i-1)*3)+1).getTitle());
-		Image loadImage2 = new Image(menu.getResults().get(((i-1)*3)).getImage());
-		image2.setImage(loadImage2);
-		Spoonacular.id[1] = menu.getResults().get(((i-1)*3)+1).getId();
-		
-		checkBox3.setText(menu.getResults().get(((i-1)*3)+2).getTitle());
-		Image loadImage3 = new Image(menu.getResults().get(((i-1)*3)).getImage());
-		image1.setImage(loadImage3);
-		Spoonacular.id[2] = menu.getResults().get(((i-1)*3)+2).getId();
-	}
-	
-    @FXML
-    void nextMenuItems(ActionEvent event) throws JsonParseException, JsonMappingException, UnirestException, IOException {
-    	int i = Integer.parseInt(pageNumber.getText());
-    	pageNumber.setText(Integer.toString(i+1));
-    	createMenu();
-    }
-
-    @FXML
-    void previousMenuItems(ActionEvent event) throws JsonParseException, JsonMappingException, UnirestException, IOException {
-    	int i = Integer.parseInt(pageNumber.getText());
-    	pageNumber.setText(Integer.toString(i-1));
-    	createMenu();
-    }
 
 	@Override
-	public void handle(ActionEvent arg0) {
+	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
