@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.LoginController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.LoginController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label layoutX="271.0" layoutY="137.0" text="LOGIN" />
-    <Button layoutX="307.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleLogin" text="User" />
-    <Button layoutX="137.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
+      <Pane prefHeight="800.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/Flat-Pack-Kitchen-Ranges_main%20kitchen.jpg" />
+               </image>
+            </ImageView>
+          <Button fx:id="backHome" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleHome" style="-fx-background-color: #FF4949;" text="Home" />
+          <Button fx:id="LoginButton" layoutX="454.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #FF4949;" text="Login" />
+          <Label fx:id="loginTitle" alignment="CENTER" layoutX="335.0" layoutY="180.0" style="-fx-background-color: #FF4949;" text="LOGIN">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Label>
+            <TextField fx:id="userNameField" layoutX="338.0" layoutY="317.0" promptText="Username" />
+            <PasswordField fx:id="passwordField" layoutX="338.0" layoutY="375.0" promptText="Password" />
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="281.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/iconfinder_key__security__password__open_2542016.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="285.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/iconfinder_user_male2_172626.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="createUser" layoutX="336.0" layoutY="419.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #FF4949;" text="Create User" />
+         </children>
+      </Pane>
   </children>
 </AnchorPane>

@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-public class HomeController implements Initializable, EventHandler<ActionEvent>  {
+public class HomeController implements Initializable{
 	
 	@FXML
     private Label MainTitleLabel;
@@ -31,9 +31,8 @@ public class HomeController implements Initializable, EventHandler<ActionEvent> 
 	void handleLogin(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-			Main.stage.setScene(new Scene(root, 700, 850));
+			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -53,14 +52,9 @@ public class HomeController implements Initializable, EventHandler<ActionEvent> 
 	}
 
 	@Override
-	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 50));
-		
+		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 75));
+		SearchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
+		LoginButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));
 	}
 }
