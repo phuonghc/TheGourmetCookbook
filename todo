@@ -4,7 +4,7 @@ List of things todo
 Programmer: Harrison Luko
 Assigned Date: 4/2/2019
 Due Date: 4/3/2019
-Completion Date:
+Completion Date:4/3/2019
 
 2) RecipeController: Load appropriate recipe information, with formatting of instructions and ingredients.
 
@@ -42,7 +42,11 @@ Assigned Date: 4/2/2019
 Due Date: 4/6/2019
 Completion Date: 
 
-10) UserController: Create a new model class with user information. Add fxml items to User.fxml to display user information, previous searches and favorite recipes. 
+10) UserController: Create a new model class with user information. Add fxml items to User.fxml to display user information, previous searches and favorite recipes.
+Programmer: Harrison Luko
+Assigned Date: 4/3/2019
+Due Date: 4/8/2019
+Completion Date:
 
 11) LoginController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 Programmer: Marco
@@ -58,16 +62,17 @@ Completion Date:
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
+14) MenuController: Error message when going from menu page to recipe without selecting a menu item from the radio buttons.
+Programmer: Sayontani Ray
+Assigned Date: 4/2/2019
+Due Date: 4/2/2019
+Completion Date:4/2/2019
 
-14) MenuController: Error messages when going previous from 1, and next from last possible page.
-
-15) MenuController: Error message when going from menu page to recipe without selecting a menu item from the radio buttons.
-
-16) SearchController: Don't let user search without an input. 
-
-17) HomeControllet: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+15) HomeControllet: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 Programmer: Marco
 Assigned Date: 4/2/2019
 Due Date: 4/2/2019
 Completion Date: 4/2/2019
+
+
 
