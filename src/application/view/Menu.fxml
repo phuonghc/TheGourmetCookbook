@@ -22,7 +22,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Pagination fx:id="resultsPagination" layoutX="130.0" layoutY="553.0" />
+    <Pagination fx:id="resultPagination" layoutX="130.0" layoutY="553.0" />
     <Button layoutX="530.0" layoutY="531.0" mnemonicParsing="false" onAction="#handleRecipe" text="RECIPE" />
     <Button layoutX="26.0" layoutY="537.0" mnemonicParsing="false" onAction="#handleSearch" text="SEARCH" />
   </children>

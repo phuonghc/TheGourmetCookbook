@@ -1,7 +1,9 @@
 package application.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -33,7 +35,7 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 	private GridPane resultPane;
 
 	@FXML
-	private Pagination resultsPagination;
+	private Pagination resultPagination;
 
 	private Menu menu;
 
@@ -49,12 +51,12 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			itemsPerPage = 3;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
-		} catch (UnirestException | IOException exception) {
-			exception.printStackTrace();
+		} catch (UnirestException | IOException ioException) {
+			ioException.printStackTrace();
 		}
 
-		resultsPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
-		resultsPagination.setPageFactory((Integer pageIndex) -> createMenu(pageIndex));
+		resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
+		resultPagination.setPageFactory((Integer pageIndex) -> createMenu(pageIndex));
 	}
 
 	public GridPane createMenu(int pageIndex) {
@@ -70,7 +72,16 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			radioButton.setUserData(result.getId());
 			resultPane.add(radioButton, 0, rowIndex);
 
-			Image image = new Image(result.getImage());
+			InputStream inputStream = null;
+			try {
+				URL url = new URL(result.getImage());
+				URLConnection urlConnection = url.openConnection();
+				urlConnection.setRequestProperty("User-Agent", null);
+				inputStream = urlConnection.getInputStream();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+			Image image = new Image(inputStream);
 			ImageView imageView = new ImageView();
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);
@@ -103,8 +114,8 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Recipe.fxml"));
 			Main.stage.setScene(new Scene(root, 700, 850));
 			Main.stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
+		} catch(Exception exception) {
+			exception.printStackTrace();
 		}
 	}
 
@@ -115,8 +126,8 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Search.fxml"));
 			Main.stage.setScene(new Scene(root, 700, 850));
 			Main.stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
+		} catch(Exception exception) {
+			exception.printStackTrace();
 		}
 	}
 
