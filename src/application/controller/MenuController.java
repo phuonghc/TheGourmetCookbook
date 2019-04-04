@@ -94,6 +94,7 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			MenuItem result = menu.getResults().get(i);
 			
 			RadioButton radioButton = new RadioButton();
+			radioButton.getStyleClass().add("menu-radio-button");
 			radioButton.setToggleGroup(toggleGroup);
 			radioButton.setUserData(result.getId());
 			resultPane.add(radioButton, 0, rowIndex);

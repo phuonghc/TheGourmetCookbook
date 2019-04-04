@@ -1,9 +1,25 @@
-.normal-button {
-	-fx-font-family: Calibri;
-	-fx-font-weight: bold;
-	-fx-font-size: 20;
-	-fx-text-fill: white;
+.menu-radio-button .radio {
+	-fx-background-color: #ffeeff;
+}
+
+.menu-radio-button .radio:hover {
+	-fx-background-color: grey;
+}
+
+.menu-radio-button:selected .radio {
 	-fx-background-color: brown;
+}
+
+.menu-radio-button:selected .radio:hover {
+	-fx-background-color: grey;
+}
+
+.menu-radio-button:selected .dot {
+	-fx-background-color: white;
+}
+
+.menu-radio-button:selected .dot:hover {
+	-fx-background-color: black;
 }
 
 .menu-label {
@@ -12,34 +28,72 @@
 	-fx-font-weight: bold;
 }
 
-.pagination .pagination-control .toggle-button {
+.menu-pagination .pagination-control .toggle-button {
 	-fx-font-family: Calibri;
 	-fx-font-weight: bold;
 	-fx-font-size: 15;
 	-fx-background-color: #ffeeff;
 }
 
-.pagination .pagination-control .toggle-button:selected {
-	-fx-font-family: Calibri;
-	-fx-font-weight: bold;
-	-fx-font-size: 15;
-    -fx-background-color: brown;
-}
-
-.pagination .pagination-control .left-arrow-button, .right-arrow-button {
-    -fx-background-color: #ffeeff;
-}
-
-.pagination .pagination-control .toggle-button:hover, .left-arrow-button:hover, .right-arrow-button:hover {
+.menu-pagination .pagination-control .toggle-button:hover {
     -fx-background-color: grey;
 }
 
-.pagination .pagination-control .left-arrow, .right-arrow {
+.menu-pagination .pagination-control .toggle-button:selected {
     -fx-background-color: brown;
 }
 
-.pagination .label {
+.menu-pagination .pagination-control .toggle-button:selected:hover {
+    -fx-background-color: grey;
+}
+
+.menu-pagination .pagination-control .left-arrow-button {
+    -fx-background-color: #ffeeff;
+}
+
+.menu-pagination .pagination-control .left-arrow-button:hover {
+    -fx-background-color: grey;
+}
+
+.menu-pagination .pagination-control .right-arrow-button {
+    -fx-background-color: #ffeeff;
+}
+
+.menu-pagination .pagination-control .right-arrow-button:hover {
+    -fx-background-color: grey;
+}
+
+.menu-pagination .pagination-control .left-arrow {
+    -fx-background-color: brown;
+}
+
+.menu-pagination .pagination-control .left-arrow-button:hover .left-arrow {
+    -fx-background-color: black;
+}
+
+.menu-pagination .pagination-control .right-arrow {
+    -fx-background-color: brown;
+}
+
+.menu-pagination .pagination-control .right-arrow-button:hover .right-arrow {
+    -fx-background-color: black;
+}
+
+.menu-pagination .label {
 	-fx-font-family: Calibri;
 	-fx-font-weight: bold;
 	-fx-font-size: 15;
+}
+
+.menu-button {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 20;
+	-fx-text-fill: white;
+	-fx-background-color: brown;
+}
+
+.menu-button:hover {
+	-fx-text-fill: black;
+	-fx-background-color: grey;
 }
