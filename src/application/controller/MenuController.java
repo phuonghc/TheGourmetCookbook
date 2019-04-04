@@ -55,7 +55,7 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 		//Populate the scene with the Menu
 		try {
 			menu = Spoonacular.loadMenu();
-			itemsPerPage = 4;
+			itemsPerPage = 5;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
 			resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));

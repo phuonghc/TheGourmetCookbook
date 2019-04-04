@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="850.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MenuController">
 	<children>
@@ -15,10 +16,12 @@
 				<Image url="file:backgroundPics/background-menu.jpg" />
 			</image>
 		</ImageView>
-		<GridPane fx:id="resultPane" layoutX="20.0" layoutY="40.0" vgap="10" hgap="10" />
-		<Button layoutX="380.0" layoutY="750.0" styleClass="normal-button" onAction="#handleRecipe" text="Recipe" />
+		<VBox layoutX="65" layoutY="225.0">
+			<GridPane fx:id="resultPane" vgap="10.0" hgap="10.0" />
+			<Pagination fx:id="resultPagination" />
+		</VBox>
 		<Button layoutX="65.0" layoutY="750.0" styleClass="normal-button" onAction="#handleSearch" text="Search" />
-		<Pagination fx:id="resultPagination" layoutX="175.0" layoutY="345.0" />
+		<Button layoutX="380.0" layoutY="750.0" styleClass="normal-button" onAction="#handleRecipe" text="Recipe" />
 	</children>
 	
 	<stylesheets>
