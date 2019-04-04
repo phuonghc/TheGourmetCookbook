@@ -1,0 +1,13 @@
+.normal-button {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 20;
+	-fx-text-fill: white;
+	-fx-background-color: brown;
+}
+
+.menu-label {
+	-fx-font-family: Calibri;
+	-fx-font-size: 18;
+	-fx-font-weight: bold;
+}

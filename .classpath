@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="JARs/jackson-databind-2.9.8.jar"/>
 	<classpathentry kind="lib" path="JARs/org.json.jar"/>
 	<classpathentry kind="lib" path="JARs/unirest-java-1.4.9.jar"/>
+	<classpathentry kind="lib" path="JARs/commons-beanutils-1.9.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

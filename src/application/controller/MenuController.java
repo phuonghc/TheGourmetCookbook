@@ -2,9 +2,14 @@ package application.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -17,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,6 +34,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 
 public class MenuController implements EventHandler<ActionEvent>, Initializable {
 	
@@ -48,19 +55,38 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 		//Populate the scene with the Menu
 		try {
 			menu = Spoonacular.loadMenu();
-			itemsPerPage = 3;
+			itemsPerPage = 4;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
+			resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
+			resultPagination.setPageFactory(new Callback<Integer, Node>() {
+				 
+	            @Override
+	            public Node call(Integer pageIndex) {
+	                if (pageIndex < menu.getResults().size()) {
+	                    try {
+							return createMenu(pageIndex);
+						} catch (IllegalAccessException | InstantiationException | InvocationTargetException
+								| NoSuchMethodException exception) {
+							exception.printStackTrace();
+						}
+	                }
+	                return null;
+	            }
+	        });
 		} catch (UnirestException | IOException ioException) {
 			ioException.printStackTrace();
 		}
-
-		resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
-		resultPagination.setPageFactory((Integer pageIndex) -> createMenu(pageIndex));
 	}
 
-	public GridPane createMenu(int pageIndex) {
-		resultPane = new GridPane();
+	public GridPane createMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+		resultPane = (GridPane) BeanUtils.cloneBean(resultPane);
+		Set<Node> deleteNodes = new HashSet<>();
+		for (Node child : resultPane.getChildren()) {
+			deleteNodes.add(child);
+		}
+		resultPane.getChildren().removeAll(deleteNodes);
+		
 		int page = pageIndex * itemsPerPage;
 		int rowIndex = 0;
 		
@@ -83,13 +109,14 @@ public class MenuController implements EventHandler<ActionEvent>, Initializable 
 			}
 			Image image = new Image(inputStream);
 			ImageView imageView = new ImageView();
-			imageView.setFitWidth(50);
-			imageView.setFitHeight(50);
+			imageView.setFitWidth(75);
+			imageView.setFitHeight(75);
 			imageView.setPreserveRatio(true);
 			imageView.setImage(image);
 			resultPane.add(imageView, 1, rowIndex);
 
 			Label label = new Label();
+			label.getStyleClass().add("menu-label");
 			label.setText(result.getTitle());
 			resultPane.add(label, 2, rowIndex);
 

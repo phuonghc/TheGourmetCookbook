@@ -128,7 +128,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-			Main.stage.setScene(new Scene(root, 700, 850));
+			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
