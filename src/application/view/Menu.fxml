@@ -16,8 +16,8 @@
 				<Image url="file:backgroundPics/background-menu.jpg" />
 			</image>
 		</ImageView>
-		<VBox layoutX="65" layoutY="225.0">
-			<GridPane fx:id="resultPane" vgap="10.0" hgap="10.0" />
+		<VBox layoutX="65" layoutY="125.0" minHeight="335.0" prefHeight="335.0" alignment="CENTER">
+			<GridPane fx:id="resultPane" vgap="10.0" hgap="10.0" minHeight="320.0" prefHeight="320.0" />
 			<Pagination fx:id="resultPagination" />
 		</VBox>
 		<Button layoutX="65.0" layoutY="750.0" styleClass="normal-button" onAction="#handleSearch" text="Search" />
