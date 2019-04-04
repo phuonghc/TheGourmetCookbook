@@ -63,7 +63,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.setScene(new Scene(root, 600, 850));
 			Main.stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
