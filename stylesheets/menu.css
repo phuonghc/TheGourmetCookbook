@@ -11,3 +11,35 @@
 	-fx-font-size: 18;
 	-fx-font-weight: bold;
 }
+
+.pagination .pagination-control .toggle-button {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 15;
+	-fx-background-color: #ffeeff;
+}
+
+.pagination .pagination-control .toggle-button:selected {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 15;
+    -fx-background-color: brown;
+}
+
+.pagination .pagination-control .left-arrow-button, .right-arrow-button {
+    -fx-background-color: #ffeeff;
+}
+
+.pagination .pagination-control .toggle-button:hover, .left-arrow-button:hover, .right-arrow-button:hover {
+    -fx-background-color: grey;
+}
+
+.pagination .pagination-control .left-arrow, .right-arrow {
+    -fx-background-color: brown;
+}
+
+.pagination .label {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 15;
+}
