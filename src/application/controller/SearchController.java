@@ -26,17 +26,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
 
 
 public class SearchController implements EventHandler<ActionEvent>, Initializable {
 
     @FXML
     private TextField categoryTextField;
+    @FXML
+    private Label searchLabel;
     @FXML
     private ComboBox<String> categoryComboBox;
     @FXML
@@ -65,21 +69,40 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private Button homeButton;
     @FXML 
     private ImageView backgroundPic;
+//    @FXML 
+//    private ImageView textBackgroundPic;
     
     String includeString = "";
+    int numIncluded = 0;
 	String excludeString = "";
+	int numExcluded = 0;
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		searchLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 54));
+		homeButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 25));
+		searchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
+//		categoryTextField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
+//		includeTextField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
+//		excludeTextField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
+//		calorieMinTextField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
+//		calorieMaxTextField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
 		
 		try {
 		InputStream stream = null;
+		
 		Image image;
-		String picName = "Flat-Pack-Kitchen-Ranges_main kitchen.jpg";
-		stream = new FileInputStream("backgroundPics/" + picName );
+		String background = "Flat-Pack-Kitchen-Ranges_main kitchen.jpg";
+		stream = new FileInputStream("backgroundPics/" + background );
 		image = new Image(stream);
 		backgroundPic.setImage(image);
+		
+//		Image image2;
+//		String textBackground = "background-kitchen.jpg";
+//		stream = new FileInputStream("backgroundPics/" + textBackground);
+//		image2 = new Image(stream);
+//		textBackgroundPic.setImage(image2);
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -241,7 +264,13 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 			Spoonacular.included.add(includeComboBox.getValue());
 		}
 		//includeTextField.clear();
-		includeString += includeComboBox.getValue() + " ";
+		numIncluded ++;
+		
+		if(numIncluded > 1)
+			includeString += ", " + includeComboBox.getValue();
+		else
+			includeString += includeComboBox.getValue();		
+		
 		//update the include combo box's text field to match choosen value
 		includeTextField.setText(includeString);
 	}
@@ -269,9 +298,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 			Spoonacular.excluded.add(excludeComboBox.getValue());
 		}
 		//excludeTextField.clear();
+		numExcluded ++;
 		
-		//includeTextField.clear();
-		excludeString += excludeComboBox.getValue() + " ";
+		if(numExcluded > 1)
+			excludeString += ", " + excludeComboBox.getValue();
+		else
+			excludeString += excludeComboBox.getValue();
 		//update the include combo box's text field to match choosen value
 		excludeTextField.setText(excludeString);
 	}

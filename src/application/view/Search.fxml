@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -13,6 +14,7 @@
   <!-- TODO Add Nodes -->
   <children>
       <ImageView fx:id="backgroundPic" fitHeight="800.0" fitWidth="800.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="190.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="437.0" />
     <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="307.0" layoutY="396.0" onAction="#addIncluded" opacity="1.0" prefHeight="30.0" prefWidth="200.0" promptText="Include" visible="true">
       <items>
         <FXCollections fx:factory="observableArrayList">
@@ -32,7 +34,7 @@
     <TextField fx:id="calorieMaxTextField" layoutX="417.0" layoutY="573.0" prefHeight="10.0" prefWidth="90.0" promptText="Calorie Max" text="" />
     <CheckBox fx:id="vegetarianCheckBox" layoutX="375.0" layoutY="672.0" mnemonicParsing="false" text="Vegetarian" />
     <CheckBox fx:id="veganCheckBox" layoutX="375.0" layoutY="646.0" mnemonicParsing="false" text="Vegan" />
-    <Button fx:id="searchButton" layoutX="335.0" layoutY="715.0" mnemonicParsing="false" onAction="#handleMenu" prefHeight="30.0" prefWidth="143.0" text="Search!" />
+    <Button fx:id="searchButton" layoutX="335.0" layoutY="715.0" mnemonicParsing="false" onAction="#handleMenu" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #FF4949;" text="Search!" />
     <ComboBox fx:id="categoryComboBox" layoutX="307.0" layoutY="183.0" onAction="#setCategory" prefHeight="30.0" prefWidth="200.0" promptText="Category">
       <items>
         <FXCollections fx:factory="observableArrayList">
@@ -51,18 +53,18 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Button fx:id="homeButton" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="150.0" text="HOME" />
-      <Label layoutX="309.0" layoutY="613.0" prefHeight="18.0" prefWidth="280.0" text="Are you Vegan or Vegetarian? (optional)" textFill="#0e29eb">
+    <Button fx:id="homeButton" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FF4949;" text="HOME" />
+      <Label layoutX="309.0" layoutY="613.0" prefHeight="18.0" prefWidth="280.0" text="Are you Vegan or Vegetarian? (optional)" textFill="#0d0d0d">
          <font>
-            <Font size="14.0" />
+            <Font size="12.0" />
          </font>
       </Label>
-      <Label layoutX="309.0" layoutY="547.0" prefHeight="18.0" prefWidth="291.0" text="What's your max or min calories? (optional)" textFill="#0e29eb">
+      <Label layoutX="309.0" layoutY="547.0" prefHeight="18.0" prefWidth="291.0" text="What's your max or min calories? (optional)" textFill="#0a0a0a">
          <font>
-            <Font size="14.0" />
+            <Font size="12.0" />
          </font>
       </Label>
-      <Label layoutX="321.0" layoutY="82.0" prefHeight="60.0" prefWidth="159.0" text="Search" textFill="#0e29eb">
+      <Label fx:id="searchLabel" layoutX="321.0" layoutY="82.0" prefHeight="60.0" prefWidth="159.0" style="-fx-background-color: #FF4949;" text="Search" textFill="#070707">
          <font>
             <Font size="48.0" />
          </font>
