@@ -18,7 +18,7 @@
 	-fx-background-color: white;
 }
 
-.menu-radio-button:selected .dot:hover {
+.menu-radio-button:selected .radio:hover .dot {
 	-fx-background-color: black;
 }
 
