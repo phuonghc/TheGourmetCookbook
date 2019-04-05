@@ -1,6 +1,10 @@
 package application.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,6 +27,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -55,10 +61,25 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private CheckBox vegetarianCheckBox;
     @FXML
     private Button searchButton;
+    @FXML
+    private Button homeButton;
+    @FXML 
+    private ImageView backgroundPic;
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	    
+		try {
+		InputStream stream = null;
+		Image image;
+		String picName = "Flat-Pack-Kitchen-Ranges_main kitchen.jpg";
+		stream = new FileInputStream("backgroundPics/" + picName );
+		image = new Image(stream);
+		backgroundPic.setImage(image);
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		courseComboBox.getItems().removeAll(courseComboBox.getItems());
 	    courseComboBox.getItems().addAll( "main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink");
 	    

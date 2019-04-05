@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
@@ -7,47 +9,63 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.SearchController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SearchController">
   <!-- TODO Add Nodes -->
   <children>
-    <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="201.0" layoutY="301.0" onAction="#addIncluded" opacity="1.0" prefHeight="21.0" prefWidth="200.0" promptText="Include" visible="true">
+      <ImageView fx:id="backgroundPic" fitHeight="800.0" fitWidth="800.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
+    <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="307.0" layoutY="396.0" onAction="#addIncluded" opacity="1.0" prefHeight="30.0" prefWidth="200.0" promptText="Include" visible="true">
       <items>
         <FXCollections fx:factory="observableArrayList">
         </FXCollections>
       </items>
     </ComboBox>
-    <TextField id="textField" fx:id="includeTextField" layoutX="201.0" layoutY="279.0" onKeyPressed="#onIncludeEvent" prefWidth="200.0" promptText="Include" text="" />
-    <TextField fx:id="excludeTextField" layoutX="200.0" layoutY="348.0" onKeyPressed="#onExcludeEvent" prefWidth="200.0" promptText="Exclude" text="" />
-    <ComboBox id="excludeBox" fx:id="excludeComboBox" layoutX="217.0" layoutY="371.0" onAction="#addExcluded" promptText="exclude">
+    <TextField id="textField" fx:id="includeTextField" layoutX="307.0" layoutY="432.0" onKeyPressed="#onIncludeEvent" prefHeight="30.0" prefWidth="200.0" promptText="Include" text="" />
+    <TextField fx:id="excludeTextField" layoutX="307.0" layoutY="511.0" onKeyPressed="#onExcludeEvent" prefHeight="30.0" prefWidth="200.0" promptText="Exclude" text="" />
+    <ComboBox id="excludeBox" fx:id="excludeComboBox" layoutX="307.0" layoutY="477.0" onAction="#addExcluded" prefHeight="27.0" prefWidth="198.0" promptText="Exclude">
       <items>
         <FXCollections fx:factory="observableArrayList">
         </FXCollections>
       </items>
     </ComboBox>
-    <TextField id="categorySearch" fx:id="categoryTextField" layoutX="200.0" layoutY="111.0" onKeyPressed="#onCategoryEvent" prefWidth="200.0" promptText="Category" text="" />
-    <TextField fx:id="calorieMinTextField" layoutX="174.0" layoutY="454.0" prefWidth="90.0" promptText="Calorie Min" text="" />
-    <TextField fx:id="calorieMaxTextField" layoutX="297.0" layoutY="454.0" prefWidth="200.0" promptText="Calorie Max" text="" />
-    <CheckBox fx:id="vegetarianCheckBox" layoutX="182.0" layoutY="511.0" mnemonicParsing="false" text="Vegetarian" />
-    <CheckBox fx:id="veganCheckBox" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" text="Vegan" />
-    <Button fx:id="searchButton" layoutX="497.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleMenu" text="MENU" />
-    <ComboBox fx:id="categoryComboBox" layoutX="224.0" layoutY="134.0" onAction="#setCategory" prefHeight="21.0" prefWidth="177.0" promptText="Category">
+    <TextField id="categorySearch" fx:id="categoryTextField" layoutX="307.0" layoutY="230.0" onKeyPressed="#onCategoryEvent" prefHeight="30.0" prefWidth="198.0" promptText="Category" text="" />
+    <TextField fx:id="calorieMinTextField" layoutX="307.0" layoutY="573.0" prefHeight="10.0" prefWidth="90.0" promptText="Calorie Min" text="" />
+    <TextField fx:id="calorieMaxTextField" layoutX="417.0" layoutY="573.0" prefHeight="10.0" prefWidth="90.0" promptText="Calorie Max" text="" />
+    <CheckBox fx:id="vegetarianCheckBox" layoutX="375.0" layoutY="672.0" mnemonicParsing="false" text="Vegetarian" />
+    <CheckBox fx:id="veganCheckBox" layoutX="375.0" layoutY="646.0" mnemonicParsing="false" text="Vegan" />
+    <Button fx:id="searchButton" layoutX="335.0" layoutY="715.0" mnemonicParsing="false" onAction="#handleMenu" prefHeight="30.0" prefWidth="143.0" text="Search!" />
+    <ComboBox fx:id="categoryComboBox" layoutX="307.0" layoutY="183.0" onAction="#setCategory" prefHeight="30.0" prefWidth="200.0" promptText="Category">
       <items>
         <FXCollections fx:factory="observableArrayList">
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox fx:id="cuisineComboBox" layoutX="189.0" layoutY="193.0" promptText="Cuisine">
+    <ComboBox fx:id="cuisineComboBox" layoutX="307.0" layoutY="336.0" prefHeight="30.0" prefWidth="200.0" promptText="Cuisine">
       <items>
         <FXCollections fx:factory="observableArrayList">
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox fx:id="courseComboBox" layoutX="321.0" layoutY="194.0" promptText="Course">
+    <ComboBox fx:id="courseComboBox" layoutX="307.0" layoutY="290.0" prefHeight="30.0" prefWidth="200.0" promptText="Course">
       <items>
         <FXCollections fx:factory="observableArrayList">
         </FXCollections>
       </items>
     </ComboBox>
-    <Button layoutX="47.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleHome" text="HOME" />
+    <Button fx:id="homeButton" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="150.0" text="HOME" />
+      <Label layoutX="309.0" layoutY="613.0" prefHeight="18.0" prefWidth="280.0" text="Are you Vegan or Vegetarian? (optional)" textFill="#0e29eb">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="547.0" prefHeight="18.0" prefWidth="291.0" text="What's your max or min calories? (optional)" textFill="#0e29eb">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="82.0" prefHeight="60.0" prefWidth="159.0" text="Search" textFill="#0e29eb">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
   </children>
 </AnchorPane>
