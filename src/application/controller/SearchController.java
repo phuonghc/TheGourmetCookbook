@@ -66,8 +66,13 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     @FXML 
     private ImageView backgroundPic;
     
+    String includeString = "";
+	String excludeString = "";
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		
 		try {
 		InputStream stream = null;
 		Image image;
@@ -79,14 +84,32 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		//Include options
+		includeComboBox.getItems().removeAll(includeComboBox.getItems());
+		includeComboBox.getItems().addAll( "Bacon", "Eggs", "Ham", "Omelete", "Mash Potatoes");
 		
+		//Exclude options
+		excludeComboBox.getItems().removeAll(excludeComboBox.getItems());
+		excludeComboBox.getItems().addAll( "Nuts", "Dairy", "Seeds", "Corn", "Soy");
+				
+		//Category options
+		categoryComboBox.getItems().removeAll(categoryComboBox.getItems());
+		categoryComboBox.getItems().addAll( " 1", " 2", " 3", " 4", " 5");
+	    
+	    //Courses options
 		courseComboBox.getItems().removeAll(courseComboBox.getItems());
 	    courseComboBox.getItems().addAll( "main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink");
 	    
+	    //Cuisine options
 	    cuisineComboBox.getItems().removeAll(cuisineComboBox.getItems());
 	    cuisineComboBox.getItems().addAll("african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian", "british", "irish", "french", "italian", "mexican", "spanish", "middle eastern", "jewish", "american", "cajun", "southern", "greek", "german", "nordic", "eastern european", "caribbean", "latin american");
 	}
 	
+	/**
+	 * This function takes information chosen by the user and makes a call to the API
+	 * It then goes to the menu page
+	 * @param event - User clicks on "Search!" at the bottom
+	 */
 	public void handleMenu(ActionEvent event) {
 
 		String search = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?";
@@ -156,6 +179,10 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		}
 	}
 	
+	/**
+	 * This function goes back to the home page
+	 * @param event - When user clicks on "Home"
+	 */
 	public void handleHome(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
@@ -186,6 +213,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	
 	public void setCategory(ActionEvent event) {
 		categoryComboBox.setValue(categoryComboBox.getValue());
+		//update the category combo box's text field to match choosen value
+		categoryTextField.setText(categoryComboBox.getValue());
 	}
 	
 	public void onIncludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
@@ -204,13 +233,17 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 				includeComboBox.getItems().add(ingredientMatch[i].getName());
 			}
 		}
+		
 	}
 	
 	public void addIncluded(ActionEvent event) {
 		if(includeComboBox.getValue()!=null) {
 			Spoonacular.included.add(includeComboBox.getValue());
 		}
-		includeTextField.clear();
+		//includeTextField.clear();
+		includeString += includeComboBox.getValue() + " ";
+		//update the include combo box's text field to match choosen value
+		includeTextField.setText(includeString);
 	}
 	
 	public void onExcludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
@@ -235,7 +268,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		if(excludeComboBox.getValue()!=null) {
 			Spoonacular.excluded.add(excludeComboBox.getValue());
 		}
-		excludeTextField.clear();
+		//excludeTextField.clear();
+		
+		//includeTextField.clear();
+		excludeString += excludeComboBox.getValue() + " ";
+		//update the include combo box's text field to match choosen value
+		excludeTextField.setText(excludeString);
 	}
 
 	@Override
