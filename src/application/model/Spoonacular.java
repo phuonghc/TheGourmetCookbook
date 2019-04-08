@@ -84,21 +84,21 @@ public class Spoonacular {
 		String parse = response.getBody().toString(); 
 		Recipe recipe = objectMapper.readValue(parse, Recipe.class);
 		
+		/*
 		System.out.println(recipe.getTitle());
 		
-		//System.out.println(parse);
+		System.out.println(parse);
 		
-		//for(int i = 0; i <recipe.getExtendedIngredients().size(); i++) {
-		//	System.out.println(recipe.getExtendedIngredients().get(i).getUnit());
-		//}
+		for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
+			System.out.println(recipe.getExtendedIngredients().get(i).getUnit());
+		}
 		
-		//for(int i = 0; i <recipe.getAnalyzedInstructions().size(); i++) {
-		//	for(int j = 0; j < recipe.getAnalyzedInstructions().get(i).getSteps().size(); j++){
-		//		System.out.println(recipe.getAnalyzedInstructions().get(i).getSteps().get(j).getStep());
-				
-		//	}
-		//}	
-		
+		for(int i = 0; i <recipe.getAnalyzedInstructions().size(); i++) {
+			for(int j = 0; j < recipe.getAnalyzedInstructions().get(i).getSteps().size(); j++){
+				//System.out.println(recipe.getAnalyzedInstructions().get(i).getSteps().get(j).getStep());	
+			}
+		}	
+		*/
 		return recipe;
 	}
 }

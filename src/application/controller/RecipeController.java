@@ -1,7 +1,10 @@
 package application.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -10,6 +13,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import application.Main;
 import application.model.Ingredient;
+import application.model.Instruction;
 import application.model.Recipe;
 import application.model.Spoonacular;
 import javafx.event.ActionEvent;
@@ -52,11 +56,15 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		Recipe recipe = null;
 		try {
 			recipe = Spoonacular.loadRecipe();
+			popLabelRecipeName( recipe); // WORKING
+			popImg( recipe); // WORKING
+			popTxtInstructions( recipe); // WORKING
+			popTxtIngredients( recipe); // WORKING
+			
 		} catch (UnirestException | IOException e) {
 			e.printStackTrace();
 		}
 		
-		//title.setText(recipe.getTitle());
 	}
 
 	public void handlePrevious(ActionEvent event) {
@@ -69,7 +77,6 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			e.printStackTrace();
 		}
 	}
-	
 	public void handleLogout(ActionEvent event) {
 			
 			try {
@@ -79,29 +86,55 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
-	/*
-	public void popImg() { //Populate ImageView with Recipe img
-		Image newRecipeImage = new Image("");
-		imgRecipe.setImage(newRecipeImage);
 	}
-	public void popTxtIngredients() { //Populate TextArea with Ingredients required
-		String recipeName = new String( "Ingredients Required: \n from function goes here.");
-		txtRecipeIngredients.setText( recipeName);
+	public void popImg( Recipe recipe) { //Populate ImageView with Recipe img	
+		InputStream inputStream = null;
+		try {
+			URL url = new URL(recipe.getImage());
+			URLConnection urlConnection = url.openConnection();
+			urlConnection.setRequestProperty("User-Agent", null);
+			inputStream = urlConnection.getInputStream();
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
+		Image image = new Image(inputStream);
+		imgRecipe.setImage(image);
+		
+	}
+	public void popTxtIngredients( Recipe recipe) { //Populate TextArea with Ingredients required
+		String recipeIngre = new String( "");
+		for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
+			int j = i + 1;
+			recipeIngre += "Ingredient " + j + ":\n";
+			recipeIngre += recipe.getExtendedIngredients().get(i).getAmount() + " ";
+			if( recipe.getExtendedIngredients().get(i).getUnit().matches( " "))
+				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit();
+			else
+				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit() + " of ";
+			recipeIngre += recipe.getExtendedIngredients().get(i).getName();
+			recipeIngre += "\n";
+		}
+		txtRecipeIngredients.setText( recipeIngre);
 		txtRecipeIngredients.setEditable(false);
 	}
-	public void popTxtInstructions() { //Populate TextArea with Instructions required
-		String recipeName = new String( "Directions: /n from function goes here.");
-		txtRecipeDirections.setText( recipeName);
+	public void popTxtInstructions( Recipe recipe) { //Populate TextArea with Instructions required	
+		String recipeInstuc = new String( "");
+		for(int i = 0; i < recipe.getAnalyzedInstructions().size(); i++) {
+			for(int j = 0; j < recipe.getAnalyzedInstructions().get(i).getSteps().size(); j++){
+				recipeInstuc += "Step " + j + ":\n";
+				recipeInstuc += recipe.getAnalyzedInstructions().get(i).getSteps().get(j).getStep();
+				recipeInstuc += "\n";
+			}
+		}
+		txtRecipeDirections.setText( recipeInstuc);
 		txtRecipeDirections.setEditable(false);
 	}
-	public void popLabelRecipeName() { //Populate Label with Recipe Name
-		String recipeName = new String( "Recipe name from function goes here.");
-		labelRecipeName.setText( recipeName);
+	public void popLabelRecipeName( Recipe recipe) { //Populate Label with Recipe Name
+		labelRecipeName.setText(recipe.getTitle());
 	}
-	*/
+
 	@Override
-	public void handle(ActionEvent arg0) {
+	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
