@@ -34,13 +34,13 @@ Completion Date: 4/4/2019
 Programmer: Marco
 Assigned Date: 4/2/2019
 Due Date: 4/6/2019
-Completion Date: 
+Completion Date: 4/8/2019
 
 9) CreateAccountController: Add button for user to create new account on the Login.fxml, make sure to update the loginController. Build 2 new java classes CreateAccount.fxml and CreateAccountController.java. This view will prompt the user for a password and username. Upon completion it will update the text file which contains usernames and passwords. And will also create a new text file which saves user information.
 Programmer: Marco
 Assigned Date: 4/2/2019
 Due Date: 4/6/2019
-Completion Date: 
+Completion Date: 4/8/2019
 
 10) UserController: Create a new model class with user information. Add fxml items to User.fxml to display user information, previous searches and favorite recipes.
 Programmer: Marco
@@ -58,7 +58,7 @@ Completion Date: 4/2/2019
 Programmer: Marco
 Assigned Date: 4/2/2019
 Due Date: 4/6/2019
-Completion Date: 
+Completion Date: 4/8/2019
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 

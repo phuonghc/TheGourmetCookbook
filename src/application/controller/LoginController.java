@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class LoginController implements Initializable {
@@ -36,13 +38,27 @@ public class LoginController implements Initializable {
 
 	    @FXML
 	    private Button LoginButton;
+	    
+	    @FXML
+	    private Label error;
+
 
 	public void handleLogin(ActionEvent event) {
+		error.setText("");
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
-			Main.stage.setScene(new Scene(root, 800, 800));
-			Main.stage.show();
+			if(User.validateUser(userNameField.getText(), passwordField.getText())) {
+				
+				User.setUsername(userNameField.getText());
+				User.setPassword(passwordField.getText());
 			
+				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			}else {
+				error.setText("Username or Pasword is incorrect!");
+				error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 28));
+				error.setStyle("-fx-background-color: #ffffff");
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -61,7 +77,14 @@ public class LoginController implements Initializable {
 	
 	@FXML
     void createUser(ActionEvent event) {
-
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/CreateUser.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 
 
