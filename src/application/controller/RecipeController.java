@@ -107,7 +107,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			int j = i + 1;
 			recipeIngre += "Ingredient " + j + ":\n";
 			recipeIngre += recipe.getExtendedIngredients().get(i).getAmount() + " ";
-			if( recipe.getExtendedIngredients().get(i).getUnit().matches( " "))
+			if( recipe.getExtendedIngredients().get(i).getUnit().matches( ""))
 				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit();
 			else
 				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit() + " of ";
@@ -115,18 +115,21 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			recipeIngre += "\n";
 		}
 		txtRecipeIngredients.setText( recipeIngre);
+		txtRecipeIngredients.setWrapText(true);
 		txtRecipeIngredients.setEditable(false);
 	}
 	public void popTxtInstructions( Recipe recipe) { //Populate TextArea with Instructions required	
 		String recipeInstuc = new String( "");
 		for(int i = 0; i < recipe.getAnalyzedInstructions().size(); i++) {
 			for(int j = 0; j < recipe.getAnalyzedInstructions().get(i).getSteps().size(); j++){
-				recipeInstuc += "Step " + j + ":\n";
+				int k = j + 1;
+				recipeInstuc += "Step " + k + ":\n\t";
 				recipeInstuc += recipe.getAnalyzedInstructions().get(i).getSteps().get(j).getStep();
 				recipeInstuc += "\n";
 			}
 		}
 		txtRecipeDirections.setText( recipeInstuc);
+		txtRecipeDirections.setWrapText(true);
 		txtRecipeDirections.setEditable(false);
 	}
 	public void popLabelRecipeName( Recipe recipe) { //Populate Label with Recipe Name

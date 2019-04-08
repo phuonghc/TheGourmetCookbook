@@ -18,7 +18,10 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtRecipeDirections" prefHeight="595.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtRecipeDirections" maxHeight="595.0" prefHeight="595.0" prefWidth="350.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextArea>
                   <Button fx:id="buttonLogout" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogout" prefHeight="55.0" prefWidth="250.0" text="Logout" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
