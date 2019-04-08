@@ -69,13 +69,11 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private Button homeButton;
     @FXML 
     private ImageView backgroundPic;
-//    @FXML 
+ //    @FXML 
 //    private ImageView textBackgroundPic;
     
-    String includeString = "";
-    int numIncluded = 0;
-	String excludeString = "";
-	int numExcluded = 0;
+    static String includeString = "";
+    static String excludeString = "";
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -126,6 +124,9 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	    //Cuisine options
 	    cuisineComboBox.getItems().removeAll(cuisineComboBox.getItems());
 	    cuisineComboBox.getItems().addAll("african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian", "british", "irish", "french", "italian", "mexican", "spanish", "middle eastern", "jewish", "american", "cajun", "southern", "greek", "german", "nordic", "eastern european", "caribbean", "latin american");
+	
+	    //reset arraylists of included and excluded items, and clear their strings
+	    resetValues();
 	}
 	
 	/**
@@ -141,22 +142,44 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 			search += "query=" + categoryTextField.getText();
 		}
 		
-		if(Spoonacular.included.size()>0) {
+		if(!includeString.isEmpty()) { 
+			String temp = "";
+			String tokens[] = includeTextField.getText().split(",");
+			for (String value : tokens ) {
+				//Add the word (without spaces) to the arraylist
+				temp = value.replaceAll(" ", "+");
+				Spoonacular.included.add(temp);
+			}
+			
 			search += "&includeIngredients=";
 			for(int i=0; i < Spoonacular.included.size(); i++) {
 				String includes = Spoonacular.included.get(i);
-				includes.replaceAll(" ", "+");
-				search += includes + "%2c+";
+				if (i == 0)
+					search += includes + "%2c";
+				else
+					search += includes + "+%2c";
 			}
+			
 		}
 		
-		if(Spoonacular.excluded.size()>0) {
-			search += "&excludeIngredients=";
-			for(int i=0; i < Spoonacular.excluded.size(); i++) {
-				String excludes = Spoonacular.excluded.get(i);
-				excludes.replaceAll(" ", "+");
-				search += excludes + "%2c+";
+		if(!excludeString.isEmpty()) { 
+			String temp2 = "";
+			String tokens2[] = excludeTextField.getText().split(",");
+			for (String value2 : tokens2 ) {
+				//Add the word (without spaces) to the arraylist
+				temp2 = value2.replaceAll(" ", "+");
+				Spoonacular.included.add(temp2);
 			}
+			
+			search += "&excludeIngredients=";
+			for(int j=0; j < Spoonacular.excluded.size(); j++) {
+				String excludes = Spoonacular.excluded.get(j);
+				if (j == 0)
+					search += excludes + "%2c";
+				else
+					search += excludes + "+%2c";
+			}
+			
 		}
 		
 		if(courseComboBox.getValue()!=null) {
@@ -195,13 +218,22 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-			Main.stage.setScene(new Scene(root, 600, 850));
+			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+
+		resetValues();
 	}
 	
+	public static void resetValues() {
+		includeString = "";
+		excludeString = "";
+		Spoonacular.included.clear();
+		Spoonacular.excluded.clear();
+	}
+
 	/**
 	 * This function goes back to the home page
 	 * @param event - When user clicks on "Home"
@@ -209,7 +241,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	public void handleHome(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-			Main.stage.setScene(new Scene(root, 700, 850));
+			Main.stage.setScene(new Scene(root, 800, 880));
 			Main.stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -236,7 +268,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	
 	public void setCategory(ActionEvent event) {
 		categoryComboBox.setValue(categoryComboBox.getValue());
-		//update the category combo box's text field to match choosen value
+		//update the category combo box's text field to match chosen value
 		categoryTextField.setText(categoryComboBox.getValue());
 	}
 	
@@ -245,6 +277,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		if(event.getCode() == KeyCode.ENTER) {
 			
 			String all = includeTextField.getText();
+			
+			System.out.println("Inside onIncludeEvent Function");
 			
 			includeComboBox.getItems().clear();
 			
@@ -261,18 +295,18 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	
 	public void addIncluded(ActionEvent event) {
 		if(includeComboBox.getValue()!=null) {
-			Spoonacular.included.add(includeComboBox.getValue());
+			//update static String value
+			includeString = includeTextField.getText();
+			if(!includeString.isEmpty())
+				includeString += ", " + includeComboBox.getValue();
+			else
+				includeString += includeComboBox.getValue();		
+			
+			//update the include combo box's text field to match chosen value
+			includeTextField.setText(includeString);		
+		
 		}
-		//includeTextField.clear();
-		numIncluded ++;
-		
-		if(numIncluded > 1)
-			includeString += ", " + includeComboBox.getValue();
-		else
-			includeString += includeComboBox.getValue();		
-		
-		//update the include combo box's text field to match choosen value
-		includeTextField.setText(includeString);
+
 	}
 	
 	public void onExcludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
@@ -295,17 +329,17 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	
 	public void addExcluded(ActionEvent event) {
 		if(excludeComboBox.getValue()!=null) {
-			Spoonacular.excluded.add(excludeComboBox.getValue());
-		}
-		//excludeTextField.clear();
-		numExcluded ++;
+			//update static String value
+			excludeString = excludeTextField.getText();
+			if(!excludeString.isEmpty())
+				excludeString += ", " + excludeComboBox.getValue();
+			else
+				excludeString += excludeComboBox.getValue();		
+			
+			//update the include combo box's text field to match chosen value
+			excludeTextField.setText(excludeString);		
 		
-		if(numExcluded > 1)
-			excludeString += ", " + excludeComboBox.getValue();
-		else
-			excludeString += excludeComboBox.getValue();
-		//update the include combo box's text field to match choosen value
-		excludeTextField.setText(excludeString);
+		}		
 	}
 
 	@Override
