@@ -151,7 +151,7 @@ public class MenuController implements Initializable {
 
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Search.fxml"));
-			Main.stage.setScene(new Scene(root, 700, 850));
+			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception exception) {
 			exception.printStackTrace();
