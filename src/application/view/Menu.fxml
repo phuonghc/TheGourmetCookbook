@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	minHeight="850.0" prefHeight="850.0" minWidth="600.0" prefWidth="600.0" fx:controller="application.controller.MenuController">
+	minHeight="800.0" prefHeight="800.0" minWidth="800.0" prefWidth="800.0" fx:controller="application.controller.MenuController">
 	<children>
-		<ImageView fitHeight="850.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="file:backgroundPics/background-menu.jpg" />
 			</image>
 		</ImageView>
-		<VBox layoutX="65" layoutY="125.0" alignment="CENTER"
-			minHeight="335.0" prefHeight="335.0" minWidth="470.0" prefWidth="470.0">
+		<VBox layoutX="290.0" layoutY="60.0" alignment="CENTER"
+			minHeight="335.0" prefHeight="335.0" minWidth="500.0" prefWidth="500.0">
 			<GridPane fx:id="resultPane" vgap="10.0" hgap="10.0"
-				minHeight="320.0" prefHeight="320.0" minWidth="470.0" prefWidth="470.0" />
+				minHeight="320.0" prefHeight="320.0" minWidth="500.0" prefWidth="500.0" />
 			<Pagination fx:id="resultPagination" styleClass="menu-pagination" />
 		</VBox>
-		<Button text="Search" layoutX="65.0" layoutY="750.0" styleClass="menu-button"
+		<Button text="Search" layoutX="375.0" layoutY="650.0" styleClass="menu-button"
 			minHeight="40.0" prefHeight="40.0" minWidth="80.0" prefWidth="80.0" onAction="#handleSearch" />
-		<Button text="Recipe" layoutX="385.0" layoutY="750.0" styleClass="menu-button"
+		<Button text="Recipe" layoutX="650.0" layoutY="650.0" styleClass="menu-button"
 			minHeight="40.0" prefHeight="40.0" minWidth="80.0" prefWidth="80.0" onAction="#handleRecipe" />
 	</children>
 	
