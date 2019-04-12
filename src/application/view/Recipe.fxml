@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.RecipeController">
-   <children>
-      <Pane layoutY="1.0" maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0">
-         <children>
-            <VBox alignment="CENTER" layoutX="436.0" layoutY="36.0" prefHeight="750.0" prefWidth="350.0">
-               <children>
-                  <Label fx:id="labelRecipeName" alignment="CENTER" prefHeight="100.0" prefWidth="350.0" text="Placeholder" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="txtRecipeDirections" maxHeight="595.0" prefHeight="595.0" prefWidth="350.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font></TextArea>
-                  <Button fx:id="buttonLogout" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleLogout" prefHeight="55.0" prefWidth="250.0" text="Logout" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <VBox layoutX="37.0" layoutY="36.0" prefHeight="750.0" prefWidth="250.0">
-               <children>
-                  <ImageView fx:id="imgRecipe" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
-                  <TextArea fx:id="txtRecipeIngredients" prefHeight="445.0" prefWidth="200.0" />
-                  <Button fx:id="buttonPrevious" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrevious" prefHeight="55.0" prefWidth="250.0" text="Previous Page" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	minHeight="800.0" minWidth="800.0" maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0"
+	fx:controller="application.controller.RecipeController">
+	<children>
+		<ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="file:backgroundPics/Paper-Texture.jpg" />
+			</image>
+		</ImageView>
+		<HBox layoutX="10" layoutY="10" alignment="CENTER" spacing="10.0"
+			minHeight="250.0" minWidth="780.0" maxHeight="250.0" maxWidth="780.0" prefHeight="250.0" prefWidth="780.0">
+			<ImageView fx:id="imgRecipe" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+			<Label fx:id="labelRecipeName" text="" styleClass="recipe-label" wrapText="true" />
+		</HBox>
+		<HBox layoutX="10" layoutY="265" alignment="CENTER" spacing="10.0"
+			minHeight="450.0" minWidth="780.0" maxHeight="450.0" maxWidth="780.0" prefHeight="450.0" prefWidth="780.0">
+			<TextArea fx:id="txtRecipeIngredients" styleClass="recipe-text-area"
+				minHeight="450.0" minWidth="300.0" maxHeight="450.0" maxWidth="300.0" prefHeight="450.0" prefWidth="300.0" />
+			<TextArea fx:id="txtRecipeDirections" styleClass="recipe-text-area"
+				minHeight="450.0" minWidth="450.0" maxHeight="450.0" maxWidth="450.0" prefHeight="450.0" prefWidth="450.0" />
+		</HBox>
+		<HBox layoutX="10" layoutY="725" alignment="CENTER" spacing="10.0"
+			minHeight="50.0" minWidth="780.0" maxHeight="50.0" maxWidth="780.0" prefHeight="50.0" prefWidth="780.0">
+			<Button fx:id="buttonPrevious" mnemonicParsing="false" onAction="#handlePrevious" text="Menu" styleClass="recipe-button" />
+			<Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" styleClass="recipe-button" />
+		</HBox>
+	</children>
+	
+	<stylesheets>
+    	<URL value="file:stylesheets/recipe.css" />
+	</stylesheets>
 </AnchorPane>

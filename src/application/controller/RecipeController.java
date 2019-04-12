@@ -4,16 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import application.Main;
-import application.model.Ingredient;
-import application.model.Instruction;
 import application.model.Recipe;
 import application.model.Spoonacular;
 import javafx.event.ActionEvent;
@@ -81,7 +76,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-				Main.stage.setScene(new Scene(root, 700, 850));
+				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();
 			} catch(Exception e) {
 				e.printStackTrace();
