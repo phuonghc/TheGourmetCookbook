@@ -1,0 +1,28 @@
+.recipe-label {
+	-fx-font-family: Calibri;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+
+.recipe-button {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 20;
+	-fx-text-fill: white;
+	-fx-background-color: brown;
+}
+
+.recipe-button:hover {
+	-fx-text-fill: black;
+	-fx-background-color: grey;
+}
+
+.recipe-text-area {
+	-fx-border-style: solid;
+	-fx-border-color: black;
+}
+
+.recipe-text-area:selected {
+	-fx-border-style: solid;
+	-fx-border-color: black;
+}
