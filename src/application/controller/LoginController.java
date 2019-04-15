@@ -49,7 +49,6 @@ public class LoginController implements Initializable {
 				User.setUsername(userNameField.getText());
 				User.setPassword(passwordField.getText());
 				User.setLoggedIn(true);
-			
 				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
 				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();

@@ -50,24 +50,32 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+	
 		if(!User.isLoggedIn()) {
 			saveRecipe.setVisible(false);
 		}else {
 			saveRecipe.setVisible(true);
 		}
-		
+		System.out.println("z");
 		Recipe recipe = null;
+		
 		try {
+			System.out.println("y");
 			recipe = Spoonacular.loadRecipe();
+			System.out.println(recipe.getTitle());
 			popLabelRecipeName( recipe); // WORKING
+			System.out.println(recipe.getImage());
 			popImg( recipe); // WORKING
+			System.out.println("3");
 			popTxtInstructions( recipe); // WORKING
+			System.out.println("4");
 			popTxtIngredients( recipe); // WORKING
+			System.out.println("5");
 			
 		} catch (UnirestException | IOException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("w");
 	}
 
 	public void handlePrevious(ActionEvent event) {
@@ -150,7 +158,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
+		User.getUserRecipes().add(Spoonacular.recipeSearch);
+		System.out.println(User.getUserRecipes());
 	}
 }

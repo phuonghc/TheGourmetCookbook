@@ -10,6 +10,8 @@ public class Recipe {
 	
 	private String image;
 	
+	private String id;
+	
 	private ArrayList<Ingredient> extendedIngredients;
 	
 	private ArrayList<Instruction> analyzedInstructions;
@@ -32,5 +34,13 @@ public class Recipe {
 
 	public ArrayList<Instruction> getAnalyzedInstructions() {
 		return analyzedInstructions;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

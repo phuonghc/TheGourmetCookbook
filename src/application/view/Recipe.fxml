@@ -36,7 +36,7 @@
 		<HBox alignment="CENTER" layoutX="10" layoutY="725" maxHeight="50.0" maxWidth="780.0" minHeight="50.0" minWidth="780.0" prefHeight="50.0" prefWidth="780.0" spacing="10.0">
    <children>
    			<Button fx:id="buttonPrevious" mnemonicParsing="false" onAction="#handlePrevious" styleClass="recipe-button" text="Menu" />
-   			<Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#handleLogout" styleClass="recipe-button" text="Logout" />
+   			<Button fx:id="buttonLogout" mnemonicParsing="false" onAction="#handleLogout" styleClass="recipe-button" text="Home" />
             <Button fx:id="saveRecipe" mnemonicParsing="false" onAction="#handle" styleClass="recipe-button" text="Save Recipe" />
    </children>
 		</HBox>

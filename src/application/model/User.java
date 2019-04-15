@@ -28,7 +28,9 @@ public static String password;
  * the query strings of all the favorite recipes 
  * the user wants to save for later reference. 
  */
-public static ArrayList<String> userRecipes;
+public static ArrayList<String> userRecipes = new ArrayList<String>();
+
+
 
 /**
  * validateUser - this method takes in a String username and 

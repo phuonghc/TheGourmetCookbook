@@ -33,7 +33,8 @@ public class UserController implements Initializable{
     @FXML
     void savedRecipes(ActionEvent event) {
     	try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+    		System.out.println("BUtton");
+			Parent root = FXMLLoader.load(getClass().getResource("../view/SavedRecipes.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 			
