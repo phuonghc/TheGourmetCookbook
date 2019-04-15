@@ -1,12 +1,12 @@
 package application.controller;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -16,6 +16,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import application.Main;
 import application.model.Ingredient;
 import application.model.Spoonacular;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -239,12 +240,22 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 	 * @param event - When user clicks on "Home"
 	 */
 	public void handleHome(ActionEvent event) {
+		if(!User.loggedIn) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-			Main.stage.setScene(new Scene(root, 800, 880));
+			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+		}else {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
+	
+public static boolean loggedIn;
 
 /**
  * username - String that contains the 
@@ -41,7 +43,7 @@ public static ArrayList<String> userRecipes;
  */
 public static boolean validateUser(String username, String password) {
 	try { 
-		Scanner scan = new Scanner(new File("./users/logins.csv"));
+		Scanner scan = new Scanner(new File("./users/login.csv"));
 		
 		while(scan.hasNextLine()) {
 			String line = scan.nextLine();
@@ -65,7 +67,7 @@ public static int createNewAccount(String username, String password, String conf
 		return 3;
 	}else {
 		try {
-			Scanner scan = new Scanner(new File("./users/logins.csv"));
+			Scanner scan = new Scanner(new File("./users/login.csv"));
 			
 			while(scan.hasNextLine()) {
 				String line = scan.nextLine();
@@ -82,8 +84,8 @@ public static int createNewAccount(String username, String password, String conf
 	
 	try {
 	String output = username + "," + password;
-	BufferedWriter writer = new BufferedWriter(new FileWriter("./users/logins.csv",true));
-	writer.write("\n"+output);
+	BufferedWriter writer = new BufferedWriter(new FileWriter("./users/login.csv",true));
+	writer.write(output+"\n");
 	writer.close();
 	return 1;
 	} catch(IOException f) {
@@ -154,4 +156,19 @@ public static ArrayList<String> getUserRecipes() {
 public static void setUserRecipes(ArrayList<String> userRecipes) {
 	User.userRecipes = userRecipes;
 } 
+/**
+ * isLoggedIn - returns if user is logged in 
+ * @return boolean 
+ */
+public static boolean isLoggedIn() {
+	return loggedIn;
+}
+/**
+ * setLoggedIn - sets if the user is logged in 
+ * @param loggedIn - boolean that has status 
+ * off login of user.
+ */
+public static void setLoggedIn(boolean loggedIn) {
+	User.loggedIn = loggedIn;
+}
 }

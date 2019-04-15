@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.controller.UserController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.UserController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label layoutX="327.0" layoutY="134.0" text="USER" />
-    <Button layoutX="327.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
+      <Pane prefHeight="800.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/Flat-Pack-Kitchen-Ranges_main%20kitchen.jpg" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8049" height="132.0" layoutX="246.0" layoutY="302.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+            <ImageView fitHeight="84.0" fitWidth="94.0" layoutX="254.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/iconfinder_book_285636.png" />
+               </image>
+            </ImageView>
+          <Button fx:id="savedRecipesButton" alignment="BOTTOM_CENTER" layoutX="246.0" layoutY="303.0" mnemonicParsing="false" onAction="#savedRecipes" prefHeight="132.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Saved Recipes" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8049" height="138.0" layoutX="429.0" layoutY="302.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+            <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="432.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/seo.png" />
+               </image>
+            </ImageView>
+          <Button fx:id="SearchButton" alignment="BOTTOM_CENTER" layoutX="429.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="138.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Search">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+          <Label fx:id="MainTitleLabel" alignment="TOP_CENTER" layoutX="107.0" layoutY="63.0" style="-fx-background-color: #ff4949;" text="The Gourment Cookbook">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+            <Button fx:id="logoutButton" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: ff4949;" text="Log Out" />
+         </children>
+      </Pane>
   </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import application.Main;
 import application.model.Recipe;
 import application.model.Spoonacular;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -44,9 +45,16 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	private ImageView imgRecipe;
 	@FXML 
 	private Label labelRecipeName;
+	@FXML
+    private Button saveRecipe;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if(!User.isLoggedIn()) {
+			saveRecipe.setVisible(false);
+		}else {
+			saveRecipe.setVisible(true);
+		}
 		
 		Recipe recipe = null;
 		try {
@@ -73,7 +81,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		}
 	}
 	public void handleLogout(ActionEvent event) {
-			
+		if(!User.isLoggedIn()) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
 				Main.stage.setScene(new Scene(root, 800, 800));
@@ -81,6 +89,15 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	public void popImg( Recipe recipe) { //Populate ImageView with Recipe img	
 		InputStream inputStream = null;

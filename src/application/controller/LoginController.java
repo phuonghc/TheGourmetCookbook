@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import application.Main;
 import application.model.User;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class LoginController implements Initializable {
@@ -50,6 +48,7 @@ public class LoginController implements Initializable {
 				
 				User.setUsername(userNameField.getText());
 				User.setPassword(passwordField.getText());
+				User.setLoggedIn(true);
 			
 				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
 				Main.stage.setScene(new Scene(root, 800, 800));

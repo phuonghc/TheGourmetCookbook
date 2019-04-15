@@ -17,7 +17,7 @@
                   <Image url="@../../../backgroundPics/Flat-Pack-Kitchen-Ranges_main%20kitchen.jpg" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a31b1b" height="200.0" layoutX="300.0" layoutY="125.0" scaleX="3.0" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#afe7b7" height="200.0" layoutX="300.0" layoutY="125.0" scaleX="3.0" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" width="200.0" />
             <Label fx:id="title" layoutX="298.0" layoutY="196.0" text="Create User">
                <font>
                   <Font size="40.0" />
@@ -26,27 +26,27 @@
             <TextField fx:id="username" layoutX="354.0" layoutY="345.0" prefHeight="25.0" prefWidth="175.0" promptText="Username" />
             <PasswordField fx:id="password" layoutX="354.0" layoutY="400.0" prefHeight="25.0" prefWidth="175.0" promptText="password" />
             <PasswordField fx:id="confirmPassword" layoutX="354.0" layoutY="455.0" prefHeight="25.0" prefWidth="175.0" promptText="confirm password" />
-            <Label fx:id="userLabel" layoutX="265.0" layoutY="347.0" style="-fx-background-color: #a31b1b;" text="Username">
+            <Label fx:id="userLabel" layoutX="265.0" layoutY="347.0" style="-fx-background-color: #afe7b7;" text="Username">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabel" layoutX="265.0" layoutY="402.0" style="-fx-background-color: #a31b1b;" text="Password">
+            <Label fx:id="passwordLabel" layoutX="265.0" layoutY="402.0" style="-fx-background-color: #afe7b7;" text="Password">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="confirmLabel" layoutX="189.0" layoutY="457.0" prefHeight="21.0" prefWidth="140.0" style="-fx-background-color: #a31b1b;" text="Confirm Password">
+            <Label fx:id="confirmLabel" layoutX="189.0" layoutY="457.0" prefHeight="21.0" prefWidth="140.0" style="-fx-background-color: #afe7b7;" text="Confirm Password">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="createUser" layoutX="375.0" layoutY="509.0" mnemonicParsing="false" onAction="#createUser" text="Create Account" />
+            <Button fx:id="createUser" layoutX="375.0" layoutY="509.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #afe7b7;" text="Create Account" />
             <Label fx:id="error" layoutX="264.0" layoutY="275.0" prefHeight="68.0" prefWidth="300.0" textFill="RED">
                <font>
                   <Font size="50.0" />
                </font></Label>
-            <Button fx:id="backHomeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backHome" style="-fx-background-color: a31b1b;" text="Home" />
+            <Button fx:id="backHomeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backHome" style="-fx-background-color: #afe7b7;" text="Home" />
          </children>
       </Pane>
    </children>
