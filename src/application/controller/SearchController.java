@@ -108,15 +108,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		}
 		//Include options
 		includeComboBox.getItems().removeAll(includeComboBox.getItems());
-		includeComboBox.getItems().addAll( "Bacon", "Eggs", "Ham", "Omelete", "Mash Potatoes");
 		
 		//Exclude options
 		excludeComboBox.getItems().removeAll(excludeComboBox.getItems());
-		excludeComboBox.getItems().addAll( "Nuts", "Dairy", "Seeds", "Corn", "Soy");
 				
 		//Category options
 		categoryComboBox.getItems().removeAll(categoryComboBox.getItems());
-		categoryComboBox.getItems().addAll( " 1", " 2", " 3", " 4", " 5");
 	    
 	    //Courses options
 		courseComboBox.getItems().removeAll(courseComboBox.getItems());
@@ -140,7 +137,10 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		String search = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?";
 		
 		if(!categoryTextField.getText().isEmpty()) {
-			search += "query=" + categoryTextField.getText();
+			String temp = categoryTextField.getText();
+			temp = temp.replaceAll(" ", "+");
+			search += "query=" + temp;
+			
 		}
 		
 		if(!includeString.isEmpty()) { 
@@ -185,7 +185,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		
 		if(courseComboBox.getValue()!=null) {
 			String type = courseComboBox.getValue();
-			type.replaceAll(" ", "+");
+			type = type.replaceAll(" ", "+");
+			System.out.println(type);
 			search += "&type=" + type;
 		}
 
