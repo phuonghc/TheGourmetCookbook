@@ -17,6 +17,7 @@ import application.Main;
 import application.model.Menu;
 import application.model.MenuItem;
 import application.model.Spoonacular;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.RadioButton;
@@ -56,6 +58,12 @@ public class MenuController implements Initializable {
 	private int itemsPerPage;
 	
 	private ToggleGroup toggleGroup;
+	
+	/**
+	 * homeButton - button that takes you home
+	 */
+	@FXML
+    private Button homeButton;
 
 	/**
 	 * This method initializes and displays information related to menu.
@@ -194,5 +202,30 @@ public class MenuController implements Initializable {
 			exception.printStackTrace();
 		}
 	}
+	
+	/**
+	 * goHome - takes user to home scene.
+	 * @param event
+	 */
+	@FXML
+    void goHome(ActionEvent event) {
+		if(!User.isLoggedIn()) {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+    }
 
 }

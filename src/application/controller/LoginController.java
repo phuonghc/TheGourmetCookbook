@@ -17,10 +17,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 
 public class LoginController implements Initializable {
@@ -86,9 +88,14 @@ public class LoginController implements Initializable {
 				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();
 			}else {
-				error.setText("Username or Pasword is incorrect!");
-				error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 28));
-				error.setStyle("-fx-background-color: #ffffff");
+//				error.setText("Username or Pasword is incorrect!");
+//				error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 28));
+//				error.setStyle("-fx-background-color: #ffffff");
+				Alert alert = new Alert(AlertType.ERROR);
+		        alert.setTitle("Alert");
+		        alert.setHeaderText("Input Error!");
+		        alert.setContentText("Username or Passwords don't match!!");
+		        alert.showAndWait();
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

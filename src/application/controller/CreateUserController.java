@@ -17,10 +17,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 
 public class CreateUserController implements Initializable{
@@ -89,13 +91,23 @@ public class CreateUserController implements Initializable{
     	int result = User.createNewAccount(username.getText(),password.getText(),confirmPassword.getText());
     	
     		if(result == 3) {
-    			error.setText("Passwords fields don't match!");
-    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 26));
-    			error.setStyle("-fx-background-color: #ffffff");
+//    			error.setText("Passwords fields don't match!");
+//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 26));
+//    			error.setStyle("-fx-background-color: #ffffff");
+    			Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Alert");
+    	        alert.setHeaderText("Input Error!");
+    	        alert.setContentText("Password fields don't match!");
+    	        alert.showAndWait();
     		}else if(result == 2) {
-    			error.setText("User already exist!");
-    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
-    			error.setStyle("-fx-background-color: #ffffff");
+//    			error.setText("User already exist!");
+//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
+//    			error.setStyle("-fx-background-color: #ffffff");
+    			Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Alert");
+    	        alert.setHeaderText("Input Error!");
+    	        alert.setContentText("User already exist!.");
+    	        alert.showAndWait();
     		}else if(result == 1){
     			if(!User.getTemp().isEmpty()) {
     				User.getUserRecipes().add(User.getTemp());
@@ -110,9 +122,14 @@ public class CreateUserController implements Initializable{
     				e.printStackTrace();
     			}
     		}else {
-    			error.setText("Couldn't make user!");
-    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
-    			error.setStyle("-fx-background-color: #ffffff");
+//    			error.setText("Couldn't make user!");
+//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
+//    			error.setStyle("-fx-background-color: #ffffff");
+    			Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Alert");
+    	        alert.setHeaderText("Input Error!");
+    	        alert.setContentText("Couldn't make user!");
+    	        alert.showAndWait();
     		}
     }
     

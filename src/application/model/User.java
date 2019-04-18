@@ -41,7 +41,7 @@ public static ArrayList<String> userRecipes = new ArrayList<String>();
  * temp - string that holds the recipe information for a user that is not logged 
  * ing. 
  */
-public static String temp; 
+public static String temp = ""; 
 
 
 
