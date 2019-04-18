@@ -7,6 +7,10 @@ Due Date: 4/3/2019
 Completion Date:4/3/2019
 
 2) RecipeController: Load appropriate recipe information, with formatting of instructions and ingredients.
+Programmer: Christian Aguirre
+Assigned Date: 4/2/2019
+Due Date: 4/14/2019
+Completion Date: 4/14/2019
 
 3) RecipeController: Allow user to input the desired servings. And adjust the instructions/ingredients to reflect that desired amount.
 
@@ -29,6 +33,10 @@ Due Date: 4/7/2019
 Completion Date: 4/4/2019
 
 7) RecipeController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
+Programmer: Sayontani Ray
+Assigned Date: 4/12/2019
+Due Date: 4/15/2019
+Completion Date: 4/15/2019
 
 8) LoginController: Add 2 textfields for the username to enter their username and password. Add a button to login which verifies user login of username and password. Create text file which includes all usernames and passwords.
 Programmer: Marco
@@ -62,6 +70,7 @@ Completion Date: 4/8/2019
 
 13) UserController: Format and organize GUI to make buttons, comboboxes, text fields, checkboxes etc look appealing.
 
+
 14) MenuController: Error message when going from menu page to recipe without selecting a menu item from the radio buttons.
 Programmer: Sayontani Ray
 Assigned Date: 4/2/2019
@@ -77,6 +86,20 @@ Completion Date: 4/2/2019
 16) SearchController: Check for results, Loading Page?(No results loads Menu page with infinite pagination)
 
 17) SearchController: Add in option for number of choices presented in Menu items from search
+
+18) BUG -> On create account page when username passwords dont match clear the text fields
+
+19) BUG -> On login page when incorrect username and password clear the text field
+
+20) Menu page needs a home button
+
+21) Recipe page when not logged in should still have a favorites button. The button when pressed takes the user
+to the login page. Once the user logs in/ creates account the favorited recipe should be saved.
+
+22) Add home button from the users account page.
+
+23) Save user personal information? food alergies?
+
 
 
 
