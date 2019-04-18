@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class User {
 	
+
 public static boolean loggedIn;
 
 /**
@@ -35,6 +36,12 @@ public static String password;
  * the user wants to save for later reference. 
  */
 public static ArrayList<String> userRecipes = new ArrayList<String>();
+
+/**
+ * temp - string that holds the recipe information for a user that is not logged 
+ * ing. 
+ */
+public static String temp; 
 
 
 
@@ -249,5 +256,21 @@ public static boolean isLoggedIn() {
  */
 public static void setLoggedIn(boolean loggedIn) {
 	User.loggedIn = loggedIn;
+}
+
+/**
+ * getTemp - gets the temp string 
+ * @return temp - string
+ */
+public static String getTemp() {
+	return temp;
+}
+
+/**
+ * setTemp - sets the temp string
+ * @param temp - string of a recipe obj
+ */
+public static void setTemp(String temp) {
+	User.temp = temp;
 }
 }

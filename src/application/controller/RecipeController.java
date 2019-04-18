@@ -51,11 +51,11 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
-		if(!User.isLoggedIn()) {
-			saveRecipe.setVisible(false);
-		}else {
-			saveRecipe.setVisible(true);
-		}
+//		if(!User.isLoggedIn()) {
+//			saveRecipe.setVisible(false);
+//		}else {
+//			saveRecipe.setVisible(true);
+//		}
 
 		Recipe recipe = null;
 		
@@ -158,7 +158,18 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 
 	@Override
 	public void handle(ActionEvent event) {
-		User.getUserRecipes().add(Spoonacular.recipeSearch);
-		User.saveRecipes();
+		if(User.loggedIn) {
+			User.getUserRecipes().add(Spoonacular.recipeSearch);
+			User.saveRecipes();
+		}else {
+			User.setTemp(Spoonacular.recipeSearch);
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

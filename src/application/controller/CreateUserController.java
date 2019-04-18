@@ -97,6 +97,11 @@ public class CreateUserController implements Initializable{
     			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
     			error.setStyle("-fx-background-color: #ffffff");
     		}else if(result == 1){
+    			if(!User.getTemp().isEmpty()) {
+    				User.getUserRecipes().add(User.getTemp());
+    				User.saveRecipes();
+    				User.setTemp("");
+    			}
     			try {
     				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
     				Main.stage.setScene(new Scene(root, 800, 800));

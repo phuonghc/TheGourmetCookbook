@@ -77,6 +77,11 @@ public class LoginController implements Initializable {
 				User.setLoggedIn(true);
 				User.getUserRecipes().clear();
 				User.loadUserSavedRecipes();
+				if(!User.getTemp().isEmpty()) {
+					User.getUserRecipes().add(User.temp);
+					User.saveRecipes();
+					User.setTemp("");
+				}
 				Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
 				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();
