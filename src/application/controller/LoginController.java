@@ -1,3 +1,9 @@
+/**
+ * LoginController - controller that controls the login scene
+ * Application Programming Spring 2019 
+ * The Gourmet Cookbook 
+ * @author Marco Zamora - bld783
+ */
 package application.controller;
 
 import java.net.URL;

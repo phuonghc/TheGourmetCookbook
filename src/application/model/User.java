@@ -1,3 +1,9 @@
+/**
+ * User - model for the user 
+ * Application Programming Spring 2019 
+ * The Gourmet Cookbook 
+ * @author Marco Zamora - bld783
+ */
 package application.model;
 
 import java.io.BufferedWriter;

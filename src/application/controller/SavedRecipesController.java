@@ -1,3 +1,9 @@
+/**
+ * SavedRecipesController - controller for the saved recipe scene
+ * Application Programming Spring 2019 
+ * The Gourmet Cookbook 
+ * @author Marco Zamora - bld783 
+ */
 package application.controller;
 import java.io.IOException;
 import java.io.InputStream;
