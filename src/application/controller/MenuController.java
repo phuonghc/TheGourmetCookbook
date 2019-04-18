@@ -35,8 +35,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
+/**
+ * This is menu controller class.
+ * 
+ * @author Sayontani Ray (pek684)
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
 public class MenuController implements Initializable {
 	
+	// Class variables for the GUI components on the view
 	@FXML
 	private GridPane resultPane;
 
@@ -49,15 +57,21 @@ public class MenuController implements Initializable {
 	
 	private ToggleGroup toggleGroup;
 
+	/**
+	 * This method initializes and displays information related to menu.
+	 * 
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Populate the scene with the Menu
+		// Populate the scene with the Menu
 		try {
 			menu = Spoonacular.loadMenu();
 			itemsPerPage = 5;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
 			resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
+			
+			// Set page factory to create pane with menu items for selected page index
 			resultPagination.setPageFactory(new Callback<Integer, Node>() {
 				 
 	            @Override
@@ -78,7 +92,18 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method creates and returns pane with menu items for selected page index.
+	 * 
+	 * @param pageIndex
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 */
 	public GridPane createMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+		// Remove all the items from result pane
 		resultPane = (GridPane) BeanUtils.cloneBean(resultPane);
 		Set<Node> deleteNodes = new HashSet<>();
 		for (Node child : resultPane.getChildren()) {
@@ -86,6 +111,7 @@ public class MenuController implements Initializable {
 		}
 		resultPane.getChildren().removeAll(deleteNodes);
 		
+		// Update result pane with menu items for selected page index
 		int page = pageIndex * itemsPerPage;
 		int rowIndex = 0;
 		
@@ -125,8 +151,14 @@ public class MenuController implements Initializable {
 		return resultPane;
 	}
 	
+	/**
+	 * This method handles the event that occurs when the Recipe button is clicked.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void handleRecipe(ActionEvent event) {
+		// Create and display alert if no item is selected
 		if(toggleGroup.getSelectedToggle() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 	        alert.setTitle("Alert");
@@ -146,6 +178,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method handles the event that occurs when the Search button is clicked.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void handleSearch(ActionEvent event) {
 
