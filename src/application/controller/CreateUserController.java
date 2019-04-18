@@ -19,36 +19,65 @@ import javafx.scene.text.Font;
 
 public class CreateUserController implements Initializable{
 	
+	/**
+	 * password - PasswordField that holds the password
+	 *  of the user. 
+	 */
 	@FXML
     private PasswordField password;
-
+	/**
+	 * confirmPassword - PasswordField that holds the copy
+	 * of the password of the user. 
+	 */
     @FXML
     private PasswordField confirmPassword;
-
+    /**
+     * createUser - button that calls the create user
+     * methods.
+     */
     @FXML
     private Button createUser;
-
+    /**
+     * error - label that displays the error message.
+     */
     @FXML
     private Label error;
-
+    /**
+     * username - TextField that holds the username 
+     */
     @FXML
     private TextField username;
-    
+    /**
+     * title - label that holds the title of 
+     * the scene. 
+     */
     @FXML
     private Label title;
-    
+    /**
+     * userLabel - label that says userLabel
+     */
     @FXML
     private Label userLabel;
-
+    /**
+     * confirmLabel - label that says confirm password.
+     */
     @FXML
     private Label confirmLabel;
-    
+    /**
+     * passwordLabel - label that says password.
+     */
     @FXML
     private Label passwordLabel;
-
+    /**
+     * backHomeButton - takes user back to the home page
+     */
     @FXML
     private Button backHomeButton;
     
+    /**
+     * createUser - calls all methods that create a user. 
+     * @param event - ActionEvent
+     */
     @FXML
     void createUser(ActionEvent event) {
     	int result = User.createNewAccount(username.getText(),password.getText(),confirmPassword.getText());
@@ -76,6 +105,10 @@ public class CreateUserController implements Initializable{
     		}
     }
     
+    /**
+     * backHome - takes user back to the home scene
+     * @param event - ActionEvent 
+     */
     @FXML
     public void backHome(ActionEvent event) {
     	try {
@@ -88,7 +121,9 @@ public class CreateUserController implements Initializable{
 		}
     }
     
-
+    /**
+     * initialize - sets all gui components in the scene
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		username.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));

@@ -64,6 +64,14 @@ public static boolean validateUser(String username, String password) {
 	return false;
 }
 
+/**
+ * creatNewAccount - this method creates and saves a new user account.
+ * It also makes file to store recipes that a user wants to store. 
+ * @param username - String that contains the user name that a user chooses
+ * @param password - String that contains the users preferred password
+ * @param confirmPassword - String that contains a copy of the user password
+ * @return Int - returns int to be used as flag of the result of this method
+ */
 public static int createNewAccount(String username, String password, String confirmPassword) {
 	if (!password.equals(confirmPassword)) {
 		return 3;
@@ -84,19 +92,82 @@ public static int createNewAccount(String username, String password, String conf
 		}
 	}
 	
+	//Write the new user in the login.csv
 	try {
 	String output = username + "," + password;
 	BufferedWriter writer = new BufferedWriter(new FileWriter("./users/login.csv",true));
 	writer.write(output+"\n");
 	writer.close();
+	//Set the current user
+		User.setUsername(username);
+		User.setPassword(password);
+		User.loggedIn = true; 
+		
+	//Create the file to save users recipes
+		File file = new File("./userSavedRecipes/"+username+".csv");
+		try {
+			if (file.createNewFile())
+			{
+			    System.out.println("File is created!");
+			} else {
+			    System.out.println("File already exists.");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	return 1;
 	} catch(IOException f) {
 		f.printStackTrace();
 	}
+	
+	
 	return 0;
 }
 
+/**
+ * saveRecipes - this method saves the recipes that user chooses to 
+ * the users saved recipes file. 
+ */
+public static void saveRecipes() {
+	try { 
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./userSavedRecipes/"+ User.getUsername() +".csv"));
+		for(String r : userRecipes) {
+			writer.write(r+"\n");
+		}
+		writer.close();
+	} catch(IOException e) {
+		e.printStackTrace();
+	}
+}
 
+/**
+ * loadUserSavedRecipes - this method will load the saved recipes that exist on the user
+ * saved recipe files to the array list of saved recipes
+ */
+public static void loadUserSavedRecipes() {
+	try {
+		Scanner scan = new Scanner(new File("./userSavedRecipes/" + User.getUsername()+".csv"));
+		while(scan.hasNextLine()) {
+			String line = scan.nextLine();
+			User.getUserRecipes().add(line);
+		}
+		scan.close();
+	}catch(IOException e) {
+		e.printStackTrace();
+	}
+}
+
+/**
+ * logout - this method will clear all user data in the User 
+ * model, so another user can login. 
+ */
+public static void logout() {
+	User.setUsername("");
+	User.setPassword("");
+	User.getUserRecipes().clear();
+	User.loggedIn = false; 
+}
 /**
  * getUsername - gets the String that contains
  * the username of the user. 

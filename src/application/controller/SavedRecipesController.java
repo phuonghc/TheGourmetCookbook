@@ -1,26 +1,22 @@
 package application.controller;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-
 import org.apache.commons.beanutils.BeanUtils;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
-
 import application.Main;
 import application.model.Recipe;
 import application.model.Spoonacular;
 import application.model.User;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,32 +29,49 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-public class SavedRecipesController implements Initializable{
+public class SavedRecipesController implements Initializable, EventHandler<ActionEvent> {
+	
+	/**
+	 * resultPane - GripPane that holds the recipes
+	 * results
+	 */
 	@FXML
 	private GridPane resultPane;
-
+	/**
+	 * resultPagination - Pagination of all 
+	 * pages of recipe results
+	 */
 	@FXML
 	private Pagination resultPagination;
+	/**
+	 * homeButton - button that take a user home 
+	 */
+	@FXML
+    private Button homeButton;
 
-	
-
+	/**
+	 * itemsPerPage - count of the number of pages 
+	 */
 	private int itemsPerPage;
 	
+	/**
+	 * toggleGroup - button toggle group 
+	 */
 	private ToggleGroup toggleGroup;
 	
 
-
+	/**
+	 * initialize - this initializes all gui components of the scene
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("B");
-		System.out.println("1");
-//		savedRecipes.add("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/479101/information");
-//		System.out.println("2");
+
 		itemsPerPage = 5;
 		toggleGroup = new ToggleGroup();
 		Spoonacular.recipeSearch = null;
@@ -93,7 +106,20 @@ public class SavedRecipesController implements Initializable{
 		    }
 		});
 	}
-
+	
+	/**
+	 * createMenu - creates the menu of all recipes 
+	 * @param pageIndex - number of page indexes 
+	 * @return GridPane
+	 * @throws IllegalAccessException - throws this exception if an illegal action occurs
+	 * @throws InstantiationException - throws this exception if instantiation happens. 
+	 * @throws InvocationTargetException - throws this exception if invocation exception happens.
+	 * @throws NoSuchMethodException - throws this exception if no such method exception happens.
+	 * @throws JsonParseException - throws this exception if Json exception happens. 
+	 * @throws JsonMappingException - throws this exception if Json mapping exception happens 
+	 * @throws UnirestException - throws this exception if Unirest exception happens
+	 * @throws IOException - throws this exception if IOException happens 
+	 */
 	public GridPane createMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, JsonParseException, JsonMappingException, UnirestException, IOException {
 		resultPane = (GridPane) BeanUtils.cloneBean(resultPane);
 		Set<Node> deleteNodes = new HashSet<>();
@@ -142,6 +168,10 @@ public class SavedRecipesController implements Initializable{
 		return resultPane;
 	}
 	
+	/**
+	 * handleRecipe - uses picked recipe to help load recipe scene. 
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	public void handleRecipe(ActionEvent event) {
 		if(toggleGroup.getSelectedToggle() == null) {
@@ -153,13 +183,28 @@ public class SavedRecipesController implements Initializable{
 			return;
 		}
 		Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + toggleGroup.getSelectedToggle().getUserData() + "/information";
-		System.out.println("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + toggleGroup.getSelectedToggle().getUserData() + "/information");
+		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/Recipe.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../view/RecipeSaved.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
+	}
+
+	/**
+	 * handle - this method takes user to user scene. 
+	 */
+	@Override
+	public void handle(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception exception) {
+			exception.printStackTrace();
+		}
+		
 	}
 }

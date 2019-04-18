@@ -16,16 +16,31 @@ import javafx.scene.text.Font;
 
 public class HomeController implements Initializable{
 	
+	/**
+	 * MainTitleLabel - this is a label that holds 
+	 * the tile of the scene.
+	 */
 	@FXML
     private Label MainTitleLabel;
-
+	/**
+	 * SearchButton - this is the button
+	 * that takes you to the search scene. 
+	 */
     @FXML
     private Button SearchButton;
-
+    /**
+     * LogingButton - this button takes the user
+     * to the login scene. 
+     */
     @FXML
     private Button LoginButton;
 
-
+    
+    /**
+     * handleLogin - this method will switch the scene
+     * to the login scene. 
+     * @param event - ActionEvent
+     */
 	@FXML
 	void handleLogin(ActionEvent event) {
 		try {
@@ -37,6 +52,11 @@ public class HomeController implements Initializable{
 		}
 	}
 
+	/**
+	 * handleSearch - this method will switch to the 
+	 * search scene. 
+	 * @param event - ActionEvent
+	 */
 	@FXML
 	public void handleSearch(ActionEvent event) {
 		try {
@@ -49,7 +69,10 @@ public class HomeController implements Initializable{
 		}
 		
 	}
-
+	
+	/**
+	 * initialize - this method initializes all gui components.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 75));

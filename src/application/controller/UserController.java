@@ -17,23 +17,46 @@ import javafx.scene.text.Font;
 
 public class UserController implements Initializable{
 	
+	/**
+	 * MainTitleLabel - holds the title of the scene
+	 */
 	@FXML
     private Label MainTitleLabel;
-
+	/**
+	 * SearchButton - switches the scene to search scene
+	 */
     @FXML
     private Button SearchButton;
-
+    /**
+     * savedRecipesButton - switched the scene to saved 
+     * recipes scene
+     */
     @FXML
     private Button savedRecipesButton;
-    
+    /**
+     * logoutButton - switched the scene to the logged out
+     * scene
+     */
     @FXML
     private Button logoutButton;
+    /**
+     * error - label that show error
+     */
+    @FXML
+    private Label error;
 
-    
+    /**
+     * savedRecipes - switches the scene to saved recipe scene
+     * @param event - ActionEvent
+     */
     @FXML
     void savedRecipes(ActionEvent event) {
+    	
+    	if(User.getUserRecipes().size() < 1) {
+    		error.setText("There are no saved recipes for this user!");
+    		error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
+    	}else {
     	try {
-    		System.out.println("BUtton");
 			Parent root = FXMLLoader.load(getClass().getResource("../view/SavedRecipes.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
@@ -41,8 +64,13 @@ public class UserController implements Initializable{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+      }
     }
     
+    /**
+     * handleSearch - changes scene to search scene
+     * @param event - ActionEvent
+     */
     @FXML
     void handleSearch(ActionEvent event) {
     	try {
@@ -55,6 +83,9 @@ public class UserController implements Initializable{
 		}
     }
 
+    /**
+     * initialize - initializes the gui components in the scene
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 75));
@@ -62,9 +93,13 @@ public class UserController implements Initializable{
 		savedRecipesButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 16));
 	}
 	
+	/**
+	 * logout - logs the user out and switched to the home scene
+	 * @param event - ActionEvent
+	 */
 	@FXML
     void logout(ActionEvent event) {
-		User.setLoggedIn(false);
+		User.logout();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
