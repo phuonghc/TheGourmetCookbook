@@ -18,7 +18,7 @@
                </image>
             </ImageView>
           <Button fx:id="backHome" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleHome" style="-fx-background-color: #FF4949;" text="Home" />
-          <Button fx:id="LoginButton" layoutX="454.0" layoutY="419.0" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #FF4949;" text="Login" />
+          <Button fx:id="LoginButton" layoutX="329.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #FF4949;" text="Login" />
           <Label fx:id="loginTitle" alignment="CENTER" layoutX="336.0" layoutY="148.0" style="-fx-background-color: #FF4949;" text="LOGIN">
                <font>
                   <Font size="75.0" />
@@ -36,7 +36,7 @@
                   <Image url="@../../../backgroundPics/iconfinder_user_male2_172626.png" />
                </image>
             </ImageView>
-            <Button fx:id="createUser" layoutX="336.0" layoutY="419.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #FF4949;" text="Create User" />
+            <Button fx:id="createUser" layoutX="446.0" layoutY="433.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #FF4949;" text="Create User" />
             <Label fx:id="error" layoutX="251.0" layoutY="257.0" prefHeight="54.0" prefWidth="368.0" textFill="#ff0707">
                <font>
                   <Font size="23.0" />

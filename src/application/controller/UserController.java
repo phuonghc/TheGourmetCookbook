@@ -18,8 +18,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 
 public class UserController implements Initializable{
@@ -59,9 +61,12 @@ public class UserController implements Initializable{
     @FXML
     void savedRecipes(ActionEvent event) {
     	
-    	if(User.getUserRecipes().size() < 1) {
-    		error.setText("There are no saved recipes for this user!");
-    		error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
+    	if(User.getUserRecipes().size() < 1) {	
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Alert");
+	        alert.setHeaderText("Input Error!");
+	        alert.setContentText("Username has no saved recipes!!");
+	        alert.showAndWait();
     	}else {
     	try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/SavedRecipes.fxml"));

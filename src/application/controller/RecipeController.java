@@ -19,9 +19,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -159,8 +161,16 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	@Override
 	public void handle(ActionEvent event) {
 		if(User.loggedIn) {
-			User.getUserRecipes().add(Spoonacular.recipeSearch);
-			User.saveRecipes();
+			if(!User.checkIfRecipeExist(Spoonacular.recipeSearch)) {
+				User.getUserRecipes().add(Spoonacular.recipeSearch);
+				User.saveRecipes();
+			}else {
+				Alert alert = new Alert(AlertType.ERROR);
+	    		alert.setTitle("Alert");
+		        alert.setHeaderText("Input Error!");
+		        alert.setContentText("Username has already saved this recipe!!");
+		        alert.showAndWait();
+			}
 		}else {
 			User.setTemp(Spoonacular.recipeSearch);
 			try {

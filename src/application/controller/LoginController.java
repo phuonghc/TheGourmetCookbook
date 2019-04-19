@@ -142,8 +142,8 @@ public class LoginController implements Initializable {
 		backHome.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		LoginButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
 		createUser.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
-		userNameField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
-		passwordField.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
+		
+		
 	}
 
 	

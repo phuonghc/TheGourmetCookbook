@@ -63,8 +63,8 @@ public static boolean validateUser(String username, String password) {
 		while(scan.hasNextLine()) {
 			String line = scan.nextLine();
 			String token[] = line.split(",");
-			if(token[0].equalsIgnoreCase(username)) {
-				if(token[1].equalsIgnoreCase(password)) {
+			if(token[0].equals(username)) {
+				if(token[1].equals(password)) {
 					scan.close();
 					return true; 
 				}
@@ -169,6 +169,13 @@ public static void loadUserSavedRecipes() {
 	}catch(IOException e) {
 		e.printStackTrace();
 	}
+}
+
+public static boolean checkIfRecipeExist(String recipe) {
+	if(User.getUserRecipes().contains(recipe)) {
+		return true;
+	}
+	return false;
 }
 
 /**
