@@ -197,14 +197,11 @@ public class User {
 	 * @throws IOException
 	 */
 	public static void loadUserIntolerances() throws IOException {
-		File file = new File("data/userIntolerances.csv");
+		File file = new File("data/userIntolerances/" + username + ".csv");
 		Scanner scanner = new Scanner(file);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
-			String data[] = line.split(",");
-			if (data[0].equalsIgnoreCase(username)) {
-				userIntolerances.add(data[1]);
-			}
+			userIntolerances.add(line);
 		}
 		scanner.close();
 	}
@@ -215,8 +212,8 @@ public class User {
 	 * @throws IOException
 	 */
 	public static void addUserIntolerance(String intolerance) throws IOException {
-		FileWriter fileWriter = new FileWriter("data/userIntolerances.csv", true);
-		fileWriter.write("\n" + username + "," + intolerance);
+		FileWriter fileWriter = new FileWriter("data/userIntolerances/" + username + ".csv", true);
+		fileWriter.write("\n" + intolerance);
 		fileWriter.close();
 	}
 	
