@@ -27,7 +27,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.RadioButton;
@@ -58,12 +57,6 @@ public class MenuController implements Initializable {
 	private int itemsPerPage;
 	
 	private ToggleGroup toggleGroup;
-	
-	/**
-	 * homeButton - button that takes you home
-	 */
-	@FXML
-    private Button homeButton;
 
 	/**
 	 * This method initializes and displays information related to menu.
@@ -204,11 +197,13 @@ public class MenuController implements Initializable {
 	}
 	
 	/**
-	 * goHome - takes user to home scene.
+	 * This method handles the event that occurs when the Recipe button is clicked.
+	 * 
 	 * @param event
 	 */
 	@FXML
-    void goHome(ActionEvent event) {
+    void handleHome(ActionEvent event) {
+		
 		if(!User.isLoggedIn()) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
