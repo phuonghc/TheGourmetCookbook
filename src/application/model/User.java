@@ -207,13 +207,20 @@ public class User {
 	}
 	
 	/**
-	 * This method is used to add intolerance for logged-in user.
+	 * This method is used to save intolerances for logged-in user.
 	 * 
 	 * @throws IOException
 	 */
-	public static void addUserIntolerance(String intolerance) throws IOException {
-		FileWriter fileWriter = new FileWriter("data/userIntolerances/" + username + ".csv", true);
-		fileWriter.write("\n" + intolerance);
+	public static void saveUserIntolerances() throws IOException {
+		FileWriter fileWriter = new FileWriter("data/userIntolerances/" + username + ".csv");
+		int i = 0;
+		for (String intolerance : userIntolerances) {
+			if (i == 0) {
+				fileWriter.write(intolerance);
+			} else {
+				fileWriter.write("\n" + intolerance);
+			}
+		}
 		fileWriter.close();
 	}
 	

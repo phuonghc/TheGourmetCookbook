@@ -121,5 +121,22 @@ public class UserController implements Initializable{
 			e.printStackTrace();
 		}
     }
+	
+	/**
+	 * This method handles the event that occurs when the Profile button is clicked.
+	 * 
+	 * @param event
+	 */
+	@FXML
+	public void handleProfile(ActionEvent event) {
+
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Profile.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception exception) {
+			exception.printStackTrace();
+		}
+	}
 
 }

@@ -40,6 +40,18 @@
                <font>
                   <Font size="20.0" />
                </font></Button>
+               
+            <ImageView fitHeight="135.0" fitWidth="100.0" layoutX="338.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../backgroundPics/user-profile.png" />
+               </image>
+            </ImageView>
+          	<Button alignment="BOTTOM_CENTER" layoutX="338.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="135.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Profile">
+               <font>
+                  <Font size="20.0" />
+               </font>
+			</Button>
+               
           <Label fx:id="MainTitleLabel" alignment="TOP_CENTER" layoutX="107.0" layoutY="63.0" style="-fx-background-color: #ff4949;" text="The Gourment Cookbook">
                <font>
                   <Font size="50.0" />
