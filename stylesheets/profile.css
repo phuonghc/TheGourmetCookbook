@@ -1,0 +1,44 @@
+.profile-list-view {
+	-fx-font-weight: bold;
+}
+
+.profile-list-view .list-cell:even {
+	-fx-background-color: #F5F5F5;
+}
+
+.profile-list-view .list-cell:even:selected {
+	-fx-text-fill: black;
+}
+
+.profile-list-view .list-cell:odd {
+	-fx-background-color: #DCDCDC;
+}
+
+.profile-list-view .list-cell:odd:selected {
+	-fx-text-fill: black;
+}
+
+.profile-button {
+	-fx-font-family: Calibri;
+	-fx-font-weight: bold;
+	-fx-font-size: 20;
+	-fx-text-fill: white;
+	-fx-background-color: brown;
+}
+
+.profile-button:hover {
+	-fx-text-fill: black;
+	-fx-background-color: grey;
+}
+
+.welcome-label {
+	-fx-font-family: Calibri;
+	-fx-font-size: 50;
+	-fx-font-weight: bold;
+}
+
+.profile-label {
+	-fx-font-family: Calibri;
+	-fx-font-size: 25;
+	-fx-font-weight: bold;
+}

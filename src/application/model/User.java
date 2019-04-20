@@ -198,6 +198,9 @@ public class User {
 	 */
 	public static void loadUserIntolerances() throws IOException {
 		File file = new File("data/userIntolerances/" + username + ".csv");
+		if (!file.exists()) {
+			return;
+		}
 		Scanner scanner = new Scanner(file);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
@@ -218,8 +221,9 @@ public class User {
 			if (i == 0) {
 				fileWriter.write(intolerance);
 			} else {
-				fileWriter.write("\n" + intolerance);
+				fileWriter.write(System.lineSeparator() + intolerance);
 			}
+			i++;
 		}
 		fileWriter.close();
 	}
