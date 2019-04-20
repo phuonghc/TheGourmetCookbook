@@ -41,7 +41,8 @@
                   <Font size="20.0" />
                </font></Button>
                
-            <ImageView fitHeight="135.0" fitWidth="100.0" layoutX="338.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+			<Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="133.0" width="102.5" layoutX="336.5" layoutY="448.5" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fitHeight="135.0" fitWidth="100.0" layoutX="338.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-style: solid;">
                <image>
                   <Image url="@../../../backgroundPics/user-profile.png" />
                </image>
