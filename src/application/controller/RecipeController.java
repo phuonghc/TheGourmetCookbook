@@ -63,6 +63,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	private Slider sliderServings;
 	
 	private ObservableList<String> ingredientItems = FXCollections.observableArrayList();
+	private double initialSliderValue = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -85,6 +86,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			popTxtInstructions( recipe);
 			popListIngredients( recipe);
 			setSlider(recipe);
+			initialSliderValue = sliderServings.getValue();
 			
 		} catch (UnirestException | IOException e) {
 			e.printStackTrace();
@@ -129,22 +131,82 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			}
 		}
 	}
+	/**
+	 * This method acquires the new value of the Slider once the User has released the mouse, it then calls other methods
+	 * to use the information
+	 */
 	public void handleServingSlider() { //Note: Sliders are inherently double values, an (int) cast is required
-		sliderServings.adjustValue(5); //This sets the slider to the selected value
-		int sliderValue = (int) sliderServings.getValue();
-		double slideValue = sliderServings.getValue();
-	    System.out.println(sliderValue);
-	    System.out.println(slideValue);
-	    setServeLabel(sliderValue);
+		double newSliderValue = sliderServings.getValue();
+		double oldSliderValue = initialSliderValue;
+	    setServeLabel( (int) newSliderValue);
+	    ratioChangeOfIngredients( oldSliderValue, newSliderValue);
 	}
-	public void setSlider( Recipe recipe) { //Sets the initial value of the slider according to the recipe serving size
+	/**
+	 * This method sets the initial value of the slider according to the recipe serving size
+	 * @param recipe
+	 */
+	public void setSlider( Recipe recipe) { 
 		int initialValue = (int) recipe.getServings();
 		sliderServings.adjustValue(initialValue);
 		setServeLabel(initialValue);
 	}
-	public void setServeLabel( int serves) { //Update the labelServes to the current amount of people the recipe can serve
+	/**
+	 * This method updates the labelServes to the current amount of people the recipe can serve
+	 * @param serves
+	 */
+	public void setServeLabel( int serves) { 
 		String s = "Currently Serves: " + serves;
 		labelServes.setText(s);
+	}
+	/**
+	 * This method receives two double values and calculates whether the value represent an increase or decrease
+	 * and calls updateList to handle accordingly
+	 * @param oldServing
+	 * @param newServing
+	 */
+	public void ratioChangeOfIngredients( double oldServing, double newServing) { // Receive 2 servings and handle accordingly
+		double calculatedServing = 0;
+		System.out.println( "The old is: " + oldServing);
+		System.out.println( "The new is: " + newServing);
+		if( oldServing > newServing) {
+			calculatedServing = oldServing - newServing;
+			double ratioOfDecrease = calculatedServing / oldServing;
+			ratioOfDecrease = 1.0 - ratioOfDecrease;
+			updateList( ratioOfDecrease);
+		} else if( oldServing < newServing) {
+			calculatedServing = newServing - oldServing;
+			double ratioOfIncrease = calculatedServing / oldServing;
+			ratioOfIncrease += 1;
+			updateList( ratioOfIncrease);
+		} else updateList( 1.0);
+	}
+	/**
+	 * This method updates the ListView with the new ingredient amounts
+	 * @param ratio
+	 */
+	public void updateList( double ratio) { 
+		Recipe recipe = null;
+		try {
+			recipe = Spoonacular.loadRecipe();
+			String recipeIngre = new String( "");
+			ArrayList<String> arrIngredients = new ArrayList<String>();
+	
+			for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
+				recipeIngre += (recipe.getExtendedIngredients().get(i).getAmount() * ratio) + " ";
+				if( recipe.getExtendedIngredients().get(i).getUnit().matches( ""))
+					recipeIngre += recipe.getExtendedIngredients().get(i).getUnit();
+				else
+					recipeIngre += recipe.getExtendedIngredients().get(i).getUnit() + " of ";
+				recipeIngre += recipe.getExtendedIngredients().get(i).getName();
+				arrIngredients.add(i, recipeIngre);
+				recipeIngre = "";
+			}
+			ingredientItems.clear();
+			ingredientItems.addAll(arrIngredients);
+			listRecipeIngredients.setItems(ingredientItems);
+		} catch (UnirestException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
