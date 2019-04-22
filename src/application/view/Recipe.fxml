@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
@@ -29,8 +30,26 @@
 		</HBox>
 		<HBox alignment="CENTER" layoutX="10" layoutY="265" maxHeight="450.0" maxWidth="780.0" minHeight="450.0" minWidth="780.0" prefHeight="450.0" prefWidth="780.0" spacing="10.0">
    <children>
-   			<TextArea fx:id="txtRecipeIngredients" maxHeight="450.0" maxWidth="300.0" minHeight="450.0" minWidth="300.0" prefHeight="450.0" prefWidth="300.0" styleClass="recipe-text-area" />
-   			<TextArea fx:id="txtRecipeDirections" maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" styleClass="recipe-text-area" />
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Ingredients:">
+                     <font>
+                        <Font name="Times New Roman" size="36.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listRecipeIngredients" maxHeight="350.0" maxWidth="300.0" minHeight="350.0" minWidth="300.0" prefHeight="350.0" prefWidth="300.0" />
+                  <Label fx:id="labelServes" text="Currently Serves: ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="sliderServings" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" onMouseDragReleased="#handleServingSlider" onMouseReleased="#handleServingSlider" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+               </children>
+            </VBox>
+   			<TextArea fx:id="txtRecipeDirections" maxHeight="450.0" maxWidth="450.0" minHeight="450.0" minWidth="450.0" prefHeight="450.0" prefWidth="450.0" styleClass="recipe-text-area">
+               <font>
+                  <Font size="18.0" />
+               </font></TextArea>
    </children>
 		</HBox>
 		<HBox alignment="CENTER" layoutX="10" layoutY="725" maxHeight="50.0" maxWidth="780.0" minHeight="50.0" minWidth="780.0" prefHeight="50.0" prefWidth="780.0" spacing="10.0">
