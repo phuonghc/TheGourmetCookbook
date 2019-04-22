@@ -83,9 +83,37 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private ImageView backgroundPic;
     @FXML 
     private ProgressIndicator progressWheel;
+    @FXML
+    private ImageView loadingImage;
     
     static String includeString = "";
     static String excludeString = "";
+    
+    Thread th = new Thread( new Task(){
+		@Override
+		protected String call() throws Exception {
+			
+			System.out.println("NO");
+
+		 	Spoonacular.menu = Spoonacular.loadMenu();
+		 	
+			Platform.runLater(new Runnable() {
+				 @Override
+				 public void run() {
+					 try {
+				            Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
+				            Main.stage.setScene(new Scene(root, 800, 800));
+				            Main.stage.show();
+				     } catch(Exception e) {
+				            e.printStackTrace();
+				     }
+				 }
+			});
+		 	
+			return null;
+		}
+	}); 
+      
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -211,21 +239,17 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             search += "&diet=vegetarian";
         }
         
-        search += "&offset=0&number=10";
-        
-        System.out.println(search);
-        
+        search += "&offset=0&number=10";        
         Spoonacular.menuSearch = search;
         
+        User.viewSaved = false;
         resetValues();
         
-    	try {
-            Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-            Main.stage.setScene(new Scene(root, 800, 800));
-            Main.stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        //start thread to load Menu and change to MenuController when done
+        new Thread(th).start();
+    	
+        //Show the loadingImage while thread does work
+    	loadingImage.setVisible(true);
     }
     
     public static void resetValues() {
