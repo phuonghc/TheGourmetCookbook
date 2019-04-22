@@ -64,6 +64,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	
 	private ObservableList<String> ingredientItems = FXCollections.observableArrayList();
 	private double initialSliderValue = 0;
+	private Recipe currentRecipe = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -79,6 +80,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		try {
 	
 			recipe = Spoonacular.loadRecipe();
+			currentRecipe = recipe;
 	
 			popLabelRecipeName( recipe);
 			System.out.println(recipe.getImage()); //DELETE THIS LATER <---------------------
@@ -91,7 +93,6 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		} catch (UnirestException | IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
@@ -164,10 +165,8 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	 * @param oldServing
 	 * @param newServing
 	 */
-	public void ratioChangeOfIngredients( double oldServing, double newServing) { // Receive 2 servings and handle accordingly
+	public void ratioChangeOfIngredients( double oldServing, double newServing) { 
 		double calculatedServing = 0;
-		System.out.println( "The old is: " + oldServing);
-		System.out.println( "The new is: " + newServing);
 		if( oldServing > newServing) {
 			calculatedServing = oldServing - newServing;
 			double ratioOfDecrease = calculatedServing / oldServing;
@@ -185,28 +184,23 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	 * @param ratio
 	 */
 	public void updateList( double ratio) { 
-		Recipe recipe = null;
-		try {
-			recipe = Spoonacular.loadRecipe();
-			String recipeIngre = new String( "");
-			ArrayList<String> arrIngredients = new ArrayList<String>();
+		Recipe recipe = currentRecipe;
+		String recipeIngre = new String( "");
+		ArrayList<String> arrIngredients = new ArrayList<String>();
 	
-			for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
-				recipeIngre += (recipe.getExtendedIngredients().get(i).getAmount() * ratio) + " ";
-				if( recipe.getExtendedIngredients().get(i).getUnit().matches( ""))
-					recipeIngre += recipe.getExtendedIngredients().get(i).getUnit();
-				else
-					recipeIngre += recipe.getExtendedIngredients().get(i).getUnit() + " of ";
-				recipeIngre += recipe.getExtendedIngredients().get(i).getName();
-				arrIngredients.add(i, recipeIngre);
-				recipeIngre = "";
-			}
-			ingredientItems.clear();
-			ingredientItems.addAll(arrIngredients);
-			listRecipeIngredients.setItems(ingredientItems);
-		} catch (UnirestException | IOException e) {
-			e.printStackTrace();
+		for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
+			recipeIngre += (recipe.getExtendedIngredients().get(i).getAmount() * ratio) + " ";
+			if( recipe.getExtendedIngredients().get(i).getUnit().matches( ""))
+				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit();
+			else
+				recipeIngre += recipe.getExtendedIngredients().get(i).getUnit() + " of ";
+			recipeIngre += recipe.getExtendedIngredients().get(i).getName();
+			arrIngredients.add(i, recipeIngre);
+			recipeIngre = "";
 		}
+		ingredientItems.clear();
+		ingredientItems.addAll(arrIngredients);
+		listRecipeIngredients.setItems(ingredientItems);
 	}
 
 	/**
