@@ -21,12 +21,8 @@
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff8049" height="132.0" layoutX="246.0" layoutY="302.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-            <ImageView fitHeight="120.0" fitWidth="100.0" layoutX="246.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../backgroundPics/chef.png" />
-               </image>
-            </ImageView>
-          <Button fx:id="LoginButton" alignment="BOTTOM_CENTER" layoutX="246.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="132.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Login">
+            <ImageView fx:id="changingImage" fitHeight="120.0" fitWidth="100.0" layoutX="246.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true" />
+          <Button fx:id="changingButton" alignment="BOTTOM_CENTER" layoutX="246.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="132.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Login">
                <font>
                   <Font size="18.0" />
                </font></Button>
@@ -45,6 +41,17 @@
                   <Font size="50.0" />
                </font>
             </Label>
+            <Button fx:id="logoutButton" layoutX="24.0" layoutY="37.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: ff4949;" text="Log Out" />
+            <ImageView fx:id="profileImage" fitHeight="135.0" fitWidth="100.0" layoutX="350.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-style: solid;">
+               <image>
+                  <Image url="@../../../backgroundPics/user-profile.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="buttonProfile" alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="135.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Profile">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
   </children>

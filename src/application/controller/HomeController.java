@@ -6,10 +6,12 @@
  */
 package application.controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 
 public class HomeController implements Initializable{
@@ -39,7 +43,15 @@ public class HomeController implements Initializable{
      * to the login scene. 
      */
     @FXML
-    private Button LoginButton;
+    private Button changingButton;
+    @FXML
+    private ImageView changingImage;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private ImageView profileImage;
+    @FXML
+    private Button buttonProfile;
 
     
     /**
@@ -75,6 +87,38 @@ public class HomeController implements Initializable{
 		}
 		
 	}
+	/**
+	 * logout - logs the user out and switched to the home scene
+	 * @param event - ActionEvent
+	 */
+	@FXML
+    void logout(ActionEvent event) {
+		User.logout();
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+	/**
+	 * This method handles the event that occurs when the Profile button is clicked.
+	 * 
+	 * @param event
+	 */
+	@FXML
+	public void handleProfile(ActionEvent event) {
+
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Profile.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception exception) {
+			exception.printStackTrace();
+		}
+	}
 	
 	/**
 	 * initialize - this method initializes all gui components.
@@ -83,6 +127,22 @@ public class HomeController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 75));
 		SearchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
-		LoginButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));
+		//changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));
+		if( User.isLoggedIn()) {
+			changingButton.setText("Saved Recipes");
+			File file = new File("@../../backgroundPics/iconfinder_book_285636.png");
+			Image image = new Image(file.toURI().toString());
+			changingImage.setImage(image);
+			changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 16));
+		} else {
+			logoutButton.setVisible(false);
+			profileImage.setVisible(false);
+			buttonProfile.setVisible(false);
+			changingButton.setText("Login");		
+			File file = new File("@../../backgroundPics/chef.png");
+			Image image = new Image(file.toURI().toString());
+			changingImage.setImage(image);
+			changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));
+		}
 	}
 }

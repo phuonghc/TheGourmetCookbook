@@ -68,22 +68,14 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
-//		if(!User.isLoggedIn()) {
-//			saveRecipe.setVisible(false);
-//		}else {
-//			saveRecipe.setVisible(true);
-//		}
 
 		Recipe recipe = null;
 		
 		try {
-	
 			recipe = Spoonacular.loadRecipe();
 			currentRecipe = recipe;
 	
 			popLabelRecipeName( recipe);
-			System.out.println(recipe.getImage()); //DELETE THIS LATER <---------------------
 			popImg( recipe);
 			popTxtInstructions( recipe);
 			popListIngredients( recipe);
@@ -93,7 +85,17 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		} catch (UnirestException | IOException e) {
 			e.printStackTrace();
 		}
+		if(User.isLoggedIn()) {
+			for( String s : User.userRecipes) {
+				if( s.contentEquals(Spoonacular.recipeSearch)){
+					saveRecipe.disableProperty();
+				}
+			}	
+		} else {
+			
+		}
 	}
+			
 
 	/**
 	 * Changes the view back to the previous view without having to go through search again when an event is detected

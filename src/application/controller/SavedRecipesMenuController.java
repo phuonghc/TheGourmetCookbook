@@ -41,7 +41,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-public class SavedRecipesController implements Initializable, EventHandler<ActionEvent> {
+public class SavedRecipesMenuController implements Initializable, EventHandler<ActionEvent> {
 	
 	/**
 	 * resultPane - GripPane that holds the recipes
@@ -191,7 +191,7 @@ public class SavedRecipesController implements Initializable, EventHandler<Actio
 		Spoonacular.recipeSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + toggleGroup.getSelectedToggle().getUserData() + "/information";
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/RecipeSaved.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Recipe.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception exception) {
