@@ -74,7 +74,8 @@ public class HomeController implements Initializable{
 			}
 		}else {
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/SavedRecipes.fxml"));
+				User.viewSaved = true;
+				Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
 				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();
 			} catch(Exception e) {

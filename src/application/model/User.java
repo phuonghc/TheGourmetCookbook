@@ -16,8 +16,9 @@ import java.util.Scanner;
 
 public class User {
 
-
 	public static boolean loggedIn;
+	
+	public static boolean viewSaved;
 
 	/**
 	 * username - String that contains the 

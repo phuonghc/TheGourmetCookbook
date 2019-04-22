@@ -11,11 +11,14 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import application.Main;
 import application.model.Menu;
 import application.model.MenuItem;
+import application.model.Recipe;
 import application.model.Spoonacular;
 import application.model.User;
 import javafx.event.ActionEvent;
@@ -62,6 +65,51 @@ public class MenuController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		if(User.viewSaved) {
+			savedInit();
+		} else {
+			searchInit();
+		}
+	}
+
+	private void savedInit() {
+		itemsPerPage = 5;
+		toggleGroup = new ToggleGroup();
+		Spoonacular.recipeSearch = null;
+		resultPagination.setPageCount((int)Math.ceil((double)User.getUserRecipes().size()/ itemsPerPage));
+		
+		resultPagination.setPageFactory(new Callback<Integer, Node>() {
+			 
+		    @Override
+		    public Node call(Integer pageIndex) {
+		        if (pageIndex < User.getUserRecipes().size()) {
+		            try {
+						return createSavedMenu(pageIndex);
+					} catch (IllegalAccessException | InstantiationException | InvocationTargetException| NoSuchMethodException exception) {
+						exception.printStackTrace();
+					} catch (JsonParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (JsonMappingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (UnirestException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        }
+		        return null;
+		    }
+		});
+		
+	}
+
+	private void searchInit() {
+		// TODO Auto-generated method stub
 		// Populate the scene with the Menu
 		try {
 			Spoonacular.menu = Spoonacular.loadMenu();
@@ -69,23 +117,22 @@ public class MenuController implements Initializable {
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
 			resultPagination.setPageCount((int)Math.ceil((double)Spoonacular.menu.getResults().size() / itemsPerPage));
-			
+					
 			// Set page factory to create pane with menu items for selected page index
 			resultPagination.setPageFactory(new Callback<Integer, Node>() {
-				 
-	            @Override
-	            public Node call(Integer pageIndex) {
-	                if (pageIndex < Spoonacular.menu.getResults().size()) {
-	                    try {
-							return createMenu(pageIndex);
-						} catch (IllegalAccessException | InstantiationException | InvocationTargetException
-								| NoSuchMethodException exception) {
+						 
+				@Override
+		        public Node call(Integer pageIndex) {
+					if (pageIndex < Spoonacular.menu.getResults().size()) {
+						try {
+							return createSearchedMenu(pageIndex);
+						} catch (IllegalAccessException | InstantiationException | InvocationTargetException| NoSuchMethodException exception) {
 							exception.printStackTrace();
 						}
-	                }
-	                return null;
-	            }
-	        });
+			        }
+			        return null;
+			    }
+			});
 		} catch (UnirestException | IOException ioException) {
 			ioException.printStackTrace();
 		}
@@ -101,7 +148,7 @@ public class MenuController implements Initializable {
 	 * @throws InvocationTargetException
 	 * @throws NoSuchMethodException
 	 */
-	public GridPane createMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+	public GridPane createSearchedMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 		// Remove all the items from result pane
 		resultPane = (GridPane) BeanUtils.cloneBean(resultPane);
 		Set<Node> deleteNodes = new HashSet<>();
@@ -143,6 +190,67 @@ public class MenuController implements Initializable {
 			Label label = new Label();
 			label.getStyleClass().add("menu-label");
 			label.setText(result.getTitle());
+			resultPane.add(label, 2, rowIndex);
+
+			rowIndex++;
+		}
+		return resultPane;
+	}
+	
+	/**
+	 * createMenu - creates the menu of all recipes 
+	 * @param pageIndex - number of page indexes 
+	 * @return GridPane
+	 * @throws IllegalAccessException - throws this exception if an illegal action occurs
+	 * @throws InstantiationException - throws this exception if instantiation happens. 
+	 * @throws InvocationTargetException - throws this exception if invocation exception happens.
+	 * @throws NoSuchMethodException - throws this exception if no such method exception happens.
+	 * @throws JsonParseException - throws this exception if Json exception happens. 
+	 * @throws JsonMappingException - throws this exception if Json mapping exception happens 
+	 * @throws UnirestException - throws this exception if Unirest exception happens
+	 * @throws IOException - throws this exception if IOException happens 
+	 */
+	public GridPane createSavedMenu(int pageIndex) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, JsonParseException, JsonMappingException, UnirestException, IOException {
+		resultPane = (GridPane) BeanUtils.cloneBean(resultPane);
+		Set<Node> deleteNodes = new HashSet<>();
+		for (Node child : resultPane.getChildren()) {
+			deleteNodes.add(child);
+		}
+		resultPane.getChildren().removeAll(deleteNodes);
+		
+		int page = pageIndex * itemsPerPage;
+		int rowIndex = 0;
+		
+		for (int i = page; i < page + itemsPerPage && i < User.getUserRecipes().size(); i++) {
+			Spoonacular.recipeSearch = User.getUserRecipes().get(i);
+			Recipe recipe = Spoonacular.loadRecipe();
+			
+			RadioButton radioButton = new RadioButton();
+			radioButton.getStyleClass().add("menu-radio-button");
+			radioButton.setToggleGroup(toggleGroup);
+			radioButton.setUserData(recipe.getId());
+			resultPane.add(radioButton, 0, rowIndex);
+
+			InputStream inputStream = null;
+			try {
+				URL url = new URL(recipe.getImage());
+				URLConnection urlConnection = url.openConnection();
+				urlConnection.setRequestProperty("User-Agent", null);
+				inputStream = urlConnection.getInputStream();
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+			Image image = new Image(inputStream);
+			ImageView imageView = new ImageView();
+			imageView.setFitWidth(75);
+			imageView.setFitHeight(75);
+			imageView.setPreserveRatio(true);
+			imageView.setImage(image);
+			resultPane.add(imageView, 1, rowIndex);
+
+			Label label = new Label();
+			label.getStyleClass().add("menu-label");
+			label.setText(recipe.getTitle());
 			resultPane.add(label, 2, rowIndex);
 
 			rowIndex++;
