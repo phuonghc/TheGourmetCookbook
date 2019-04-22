@@ -286,6 +286,14 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			if(!User.checkIfRecipeExist(Spoonacular.recipeSearch)) {
 				User.getUserRecipes().add(Spoonacular.recipeSearch);
 				User.saveRecipes();
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Saved");
+                alert.setHeaderText("This recipe has been added to your \"Saved Recipes\"!");
+                alert.setContentText("Click OK to continue");
+                alert.showAndWait();
+
+				
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 	    		alert.setTitle("Alert");
