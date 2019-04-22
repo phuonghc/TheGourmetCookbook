@@ -205,7 +205,7 @@ public class SavedRecipesMenuController implements Initializable, EventHandler<A
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/User.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
 			Main.stage.show();
 		} catch(Exception exception) {
