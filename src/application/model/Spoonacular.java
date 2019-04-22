@@ -17,8 +17,10 @@ public class Spoonacular {
 	public static String ingredientSearch;
 	
 	public static String menuSearch;
+	public static Menu menu;
 	
 	public static String recipeSearch;
+	public static Recipe recipe;
 	
 	public static ArrayList<String> included = new ArrayList<String>();
 	public static ArrayList<String> excluded = new ArrayList<String>();

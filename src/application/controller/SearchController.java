@@ -17,11 +17,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-
 import application.Main;
 import application.model.Ingredient;
 import application.model.Spoonacular;
 import application.model.User;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -86,7 +86,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     
     static String includeString = "";
     static String excludeString = "";
-    private Task task = null;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,34 +93,15 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         searchLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 54));
         homeButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 25));
         searchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
-
-
-        //create a task and bind the progress wheel to the task to show movement
-        task = new Task<String>() {
-            @Override
-            protected String call() throws Exception {
-                int max = 7;//about 7 seconds
-                for (int i = 1; i <= max; i++) {
-                   if (isCancelled()) {
-                        break;
-                    }
-                    updateProgress(i, max);
-                    Thread.sleep(1000);
-                }
-                return null;
-            }
-        };
-        progressWheel.setProgress(0);
-        progressWheel.progressProperty().bind(task.progressProperty());        
         
         //load background image
         try {
-        InputStream stream = null;
-        Image image;
-        String background = "Flat-Pack-Kitchen-Ranges_main kitchen.jpg";
-        stream = new FileInputStream("backgroundPics/" + background );
-        image = new Image(stream);
-        backgroundPic.setImage(image);
+	        InputStream stream = null;
+	        Image image;
+	        String background = "Flat-Pack-Kitchen-Ranges_main kitchen.jpg";
+	        stream = new FileInputStream("backgroundPics/" + background );
+	        image = new Image(stream);
+	        backgroundPic.setImage(image);
         } 
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -148,140 +128,104 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         resetValues();
     }
     
-    Thread thread1 = new Thread(task);
-//    {
-//        public void run() {
-//            
-//            
-//            
-//            
-//        }
-//    };
-
-
-    
-    Thread thread2 = new Thread() {
-        public void run() {    
-            String search = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?";
-            
-            if(!categoryTextField.getText().isEmpty()) {
-                String temp = categoryTextField.getText();
-                temp = temp.replaceAll(" ", "+");
-                search += "query=" + temp;
-                
-            }
-            
-            if(!includeTextField.getText().isEmpty()) { 
-                String temp = "";
-                String tokens[] = includeTextField.getText().split(",");
-                for (String value : tokens ) {
-                    //Add the word (without spaces) to the arraylist
-                    temp = value.replaceAll(" ", "+");
-                    Spoonacular.included.add(temp);
-                }
-                search += "&includeIngredients=";
-                for(int i=0; i < Spoonacular.included.size(); i++) {
-                    String includes = Spoonacular.included.get(i);
-                    if (i == 0)
-                        search += includes + "%2c";
-                    else
-                        search += includes + "+%2c";
-                }
-            }
-            
-            if(!excludeTextField.getText().isEmpty()) { 
-                String temp2 = "";
-                String tokens2[] = excludeTextField.getText().split(",");
-                for (String value2 : tokens2 ) {
-                    //Add the word (without spaces) to the arraylist
-                    temp2 = value2.replaceAll(" ", "+");
-                    Spoonacular.excluded.add(temp2);
-                }
-                
-                search += "&excludeIngredients=";
-                for(int j=0; j < Spoonacular.excluded.size(); j++) {
-                    String excludes = Spoonacular.excluded.get(j);
-                    if (j == 0)
-                        search += excludes + "%2c";
-                    else
-                        search += excludes + "+%2c";
-                }
-                
-            }
-            
-            if(courseComboBox.getValue()!=null) {
-                String type = courseComboBox.getValue();
-                type = type.replaceAll(" ", "+");
-                System.out.println(type);
-                search += "&type=" + type;
-            }
-
-
-            if(cuisineComboBox.getValue()!=null) {
-                String cuisine = cuisineComboBox.getValue();
-                cuisine.replaceAll(" ", "+");
-                search += "&cuisine=" + cuisine;
-            }
-            
-            if(!calorieMinTextField.getText().isEmpty()) {
-                search += "&minCalories=" + calorieMinTextField.getText();
-            }
-            
-            if(!calorieMaxTextField.getText().isEmpty()) {
-                search += "&maxCalories=" + calorieMaxTextField.getText();
-            }
-            
-            if(veganCheckBox.isSelected()) {
-                search += "&diet=vegan";
-            }
-            
-            if(vegetarianCheckBox.isSelected()) {
-                search += "&diet=vegetarian";
-            }
-            
-            search += "&offset=0&number=10";
-            
-            System.out.println(search);
-            
-            Spoonacular.menuSearch = search;
-            
-            
-        }
-    };    
-    
-    
     /**
-     
-
-
      * This function takes information chosen by the user and makes a call to the API
      * It then goes to the menu page
      * @param event - User clicks on "Search!" at the bottom
      */
     public void handleMenu(ActionEvent event) {
+    	String search = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?";
         
-        //try {
-            thread1.start();
-            thread2.start();
+        if(!categoryTextField.getText().isEmpty()) {
+            String temp = categoryTextField.getText();
+            temp = temp.replaceAll(" ", "+");
+            search += "query=" + temp;
             
-//            thread1.join();
-//            thread2.join();
-//        } catch (InterruptedException e1) {
-//            e1.printStackTrace();
-//        }
+        }
+        
+        if(!includeTextField.getText().isEmpty()) { 
+            String temp = "";
+            String tokens[] = includeTextField.getText().split(",");
+            for (String value : tokens ) {
+                //Add the word (without spaces) to the arraylist
+                temp = value.replaceAll(" ", "+");
+                Spoonacular.included.add(temp);
+            }
+            search += "&includeIngredients=";
+            for(int i=0; i < Spoonacular.included.size(); i++) {
+                String includes = Spoonacular.included.get(i);
+                if (i == 0)
+                    search += includes + "%2c";
+                else
+                    search += includes + "+%2c";
+            }
+        }
+        
+        if(!excludeTextField.getText().isEmpty()) { 
+            String temp2 = "";
+            String tokens2[] = excludeTextField.getText().split(",");
+            for (String value2 : tokens2 ) {
+                //Add the word (without spaces) to the arraylist
+                temp2 = value2.replaceAll(" ", "+");
+                Spoonacular.excluded.add(temp2);
+            }
+            
+            search += "&excludeIngredients=";
+            for(int j=0; j < Spoonacular.excluded.size(); j++) {
+                String excludes = Spoonacular.excluded.get(j);
+                if (j == 0)
+                    search += excludes + "%2c";
+                else
+                    search += excludes + "+%2c";
+            }
+            
+        }
+        
+        if(courseComboBox.getValue()!=null) {
+            String type = courseComboBox.getValue();
+            type = type.replaceAll(" ", "+");
+            System.out.println(type);
+            search += "&type=" + type;
+        }
 
 
-        try {
-            
+        if(cuisineComboBox.getValue()!=null) {
+            String cuisine = cuisineComboBox.getValue();
+            cuisine.replaceAll(" ", "+");
+            search += "&cuisine=" + cuisine;
+        }
+        
+        if(!calorieMinTextField.getText().isEmpty()) {
+            search += "&minCalories=" + calorieMinTextField.getText();
+        }
+        
+        if(!calorieMaxTextField.getText().isEmpty()) {
+            search += "&maxCalories=" + calorieMaxTextField.getText();
+        }
+        
+        if(veganCheckBox.isSelected()) {
+            search += "&diet=vegan";
+        }
+        
+        if(vegetarianCheckBox.isSelected()) {
+            search += "&diet=vegetarian";
+        }
+        
+        search += "&offset=0&number=10";
+        
+        System.out.println(search);
+        
+        Spoonacular.menuSearch = search;
+        
+        resetValues();
+        
+    	try {
             Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
             Main.stage.setScene(new Scene(root, 800, 800));
             Main.stage.show();
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-
-        resetValues();
     }
     
     public static void resetValues() {
@@ -297,22 +241,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
      * @param event - When user clicks on "Home"
      */
     public void handleHome(ActionEvent event) {
-        if(!User.loggedIn) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
             Main.stage.setScene(new Scene(root, 800, 800));
             Main.stage.show();
         } catch(Exception e) {
             e.printStackTrace();
-        }
-        }else {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-                Main.stage.setScene(new Scene(root, 800, 800));
-                Main.stage.show();
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
         }
     }
     
@@ -351,11 +285,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
                 String tokens[] = includeTextField.getText().split(",");
                 all = tokens[tokens.length - 1].trim();
                 
-            }
-            else {
-                
-                all = includeTextField.getText();
-                
+            } else {
+                all = includeTextField.getText();  
             }            
             includeComboBox.getItems().clear();
             
@@ -367,7 +298,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
                 includeComboBox.getItems().add(ingredientMatch[i].getName());
             }
         }
-        
     }
     
     public void addIncluded(ActionEvent event) {
@@ -397,8 +327,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
                 String tokens[] = includeTextField.getText().split(",");
                 all = tokens[tokens.length - 1].trim();
                 
-            }
-            else {
+            } else {
                 all = excludeTextField.getText();
             }
             
@@ -428,8 +357,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         
         }        
     }
-
-
+    
     @Override
     public void handle(ActionEvent arg0) {
         // TODO Auto-generated method stub

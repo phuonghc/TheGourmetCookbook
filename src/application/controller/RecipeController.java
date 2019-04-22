@@ -68,18 +68,16 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		Recipe recipe = null;
 		
 		try {
-			recipe = Spoonacular.loadRecipe();
-			currentRecipe = recipe;
+			Spoonacular.recipe = Spoonacular.loadRecipe();
+			currentRecipe = Spoonacular.recipe;
 	
-			popLabelRecipeName( recipe);
-			popImg( recipe);
-			popTxtInstructions( recipe);
-			popListIngredients( recipe);
-			setSlider(recipe);
+			popLabelRecipeName( Spoonacular.recipe);
+			popImg( Spoonacular.recipe);
+			popTxtInstructions( Spoonacular.recipe);
+			popListIngredients( Spoonacular.recipe);
+			setSlider(Spoonacular.recipe);
 			initialSliderValue = sliderServings.getValue();
 			
 		} catch (UnirestException | IOException e) {

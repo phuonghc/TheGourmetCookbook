@@ -52,8 +52,6 @@ public class MenuController implements Initializable {
 	@FXML
 	private Pagination resultPagination;
 
-	private Menu menu;
-
 	private int itemsPerPage;
 	
 	private ToggleGroup toggleGroup;
@@ -66,18 +64,18 @@ public class MenuController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// Populate the scene with the Menu
 		try {
-			menu = Spoonacular.loadMenu();
+			Spoonacular.menu = Spoonacular.loadMenu();
 			itemsPerPage = 5;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
-			resultPagination.setPageCount((int)Math.ceil((double)menu.getResults().size() / itemsPerPage));
+			resultPagination.setPageCount((int)Math.ceil((double)Spoonacular.menu.getResults().size() / itemsPerPage));
 			
 			// Set page factory to create pane with menu items for selected page index
 			resultPagination.setPageFactory(new Callback<Integer, Node>() {
 				 
 	            @Override
 	            public Node call(Integer pageIndex) {
-	                if (pageIndex < menu.getResults().size()) {
+	                if (pageIndex < Spoonacular.menu.getResults().size()) {
 	                    try {
 							return createMenu(pageIndex);
 						} catch (IllegalAccessException | InstantiationException | InvocationTargetException
@@ -116,8 +114,8 @@ public class MenuController implements Initializable {
 		int page = pageIndex * itemsPerPage;
 		int rowIndex = 0;
 		
-		for (int i = page; i < page + itemsPerPage && i < menu.getResults().size(); i++) {
-			MenuItem result = menu.getResults().get(i);
+		for (int i = page; i < page + itemsPerPage && i < Spoonacular.menu.getResults().size(); i++) {
+			MenuItem result = Spoonacular.menu.getResults().get(i);
 			
 			RadioButton radioButton = new RadioButton();
 			radioButton.getStyleClass().add("menu-radio-button");
@@ -204,22 +202,12 @@ public class MenuController implements Initializable {
 	@FXML
     void handleHome(ActionEvent event) {
 		
-		if(!User.isLoggedIn()) {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-				Main.stage.setScene(new Scene(root, 800, 800));
-				Main.stage.show();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-				Main.stage.setScene(new Scene(root, 800, 800));
-				Main.stage.show();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
     }
 

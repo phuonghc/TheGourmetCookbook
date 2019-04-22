@@ -61,12 +61,25 @@ public class HomeController implements Initializable{
      */
 	@FXML
 	void handleLogin(ActionEvent event) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-			Main.stage.setScene(new Scene(root, 800, 800));
-			Main.stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
+		
+		System.out.println(User.isLoggedIn());
+		
+		if(!User.isLoggedIn()) {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("../view/SavedRecipes.fxml"));
+				Main.stage.setScene(new Scene(root, 800, 800));
+				Main.stage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
