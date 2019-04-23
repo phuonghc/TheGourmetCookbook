@@ -254,7 +254,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         new Thread(th).start();
     	
         //Show the loadingImage while thread does work
-    	loadingImage.setVisible(true);
+        //*********commented out GIF
+    	//loadingImage.setVisible(true);
     }
     
     public static void resetValues() {
