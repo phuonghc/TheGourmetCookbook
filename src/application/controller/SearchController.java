@@ -177,9 +177,10 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             
         }
         
-        if(!includeTextField.getText().isEmpty()) { 
+        if(!includeString.isEmpty()) { 
+        	System.out.println("inside include String");
             String temp = "";
-            String tokens[] = includeTextField.getText().split(",");
+            String tokens[] = includeString.split(",");
             for (String value : tokens ) {
                 //Add the word (without spaces) to the arraylist
                 temp = value.replaceAll(" ", "+");
@@ -195,9 +196,9 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             }
         }
         
-        if(!excludeTextField.getText().isEmpty()) { 
+        if(!excludeString.isEmpty()) { 
             String temp2 = "";
-            String tokens2[] = excludeTextField.getText().split(",");
+            String tokens2[] = excludeString.split(",");
             for (String value2 : tokens2 ) {
                 //Add the word (without spaces) to the arraylist
                 temp2 = value2.replaceAll(" ", "+");
@@ -320,17 +321,11 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         
         if(event.getCode() == KeyCode.ENTER) {
             
-            String all = "";
-            
-            //includeComboBox.setPromptText("Click here");
-            if( includeTextField.getText().contains(",")) {
-                String tokens[] = includeTextField.getText().split(",");
-                all = tokens[tokens.length - 1].trim();
-                
-            } else {
-                all = includeTextField.getText();  
-            }            
+        	String all = "";
+            all = includeTextField.getText();
+            includeTextField.setText("");
             includeComboBox.getItems().clear();
+            includeComboBox.setPromptText("Click here");
             
             Spoonacular.ingredientSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete?number=10&query=" + all;
             
@@ -344,36 +339,25 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     
     public void addIncluded(ActionEvent event) {
         if(includeComboBox.getValue()!=null) {
-            //update static String value
-            includeString = includeTextField.getText();
+        	String temp = includeComboBox.getValue();
             if(!includeString.isEmpty())
-                includeString += ", " + includeComboBox.getValue();
+                includeString += ", " + temp;
             else
-                includeString += includeComboBox.getValue();        
-            
-            //update the include combo box's text field to match chosen value
-            includeTextField.setText(includeString);    
-        
+                includeString += temp;      
+            System.out.println(includeString);
+            includeTA.setText(includeString);  
         }
-
-
     }
     
     public void onExcludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
         
         if(event.getCode() == KeyCode.ENTER) {
             
-            String all = "";
-        
-            if( includeTextField.getText().contains(",")) {
-                String tokens[] = includeTextField.getText().split(",");
-                all = tokens[tokens.length - 1].trim();
-                
-            } else {
-                all = excludeTextField.getText();
-            }
-            
+        	String all = "";
+            all = excludeTextField.getText();
+            excludeTextField.setText("");
             excludeComboBox.getItems().clear();
+            excludeComboBox.setPromptText("Click here");
             
             Spoonacular.ingredientSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete?number=10&query=" + all;
             
@@ -382,21 +366,19 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             for(int i = 0; i< ingredientMatch.length; i++) {
                 excludeComboBox.getItems().add(ingredientMatch[i].getName());
             }
+
         }
     }
     
     public void addExcluded(ActionEvent event) {
-        if(excludeComboBox.getValue()!=null) {
+    	if(excludeComboBox.getValue()!=null) {
             //update static String value
-            excludeString = excludeTextField.getText();
+            String temp = excludeComboBox.getValue();
             if(!excludeString.isEmpty())
-                excludeString += ", " + excludeComboBox.getValue();
+                excludeString += ", " + temp;
             else
-                excludeString += excludeComboBox.getValue();        
-            
-            //update the include combo box's text field to match chosen value
-            excludeTextField.setText(excludeString);        
-        
+                excludeString += temp;        
+            excludeTA.setText(excludeString);      
         }        
     }
     
