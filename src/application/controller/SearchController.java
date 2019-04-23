@@ -82,8 +82,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private Button homeButton;
     @FXML 
     private ImageView backgroundPic;
-    @FXML 
-    private ProgressIndicator progressWheel;
     @FXML
     private ImageView loadingImage;
     private @FXML Button includeClearButton;
@@ -334,6 +332,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             for(int i = 0; i< ingredientMatch.length; i++) {
                 includeComboBox.getItems().add(ingredientMatch[i].getName());
             }
+            includeComboBox.show();
         }
     }
     
@@ -345,7 +344,8 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
             else
                 includeString += temp;      
             System.out.println(includeString);
-            includeTA.setText(includeString);  
+            includeTA.setText(includeString); 
+            includeComboBox.show();
         }
     }
     
