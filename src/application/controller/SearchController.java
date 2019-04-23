@@ -36,6 +36,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -85,6 +86,11 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private ProgressIndicator progressWheel;
     @FXML
     private ImageView loadingImage;
+    private @FXML Button includeClearButton;
+    private @FXML Button excludeClearButton;
+    private @FXML TextArea includeTA;
+    private @FXML TextArea excludeTA;
+
     
     static String includeString = "";
     static String excludeString = "";
@@ -258,6 +264,18 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         Spoonacular.included.clear();
         Spoonacular.excluded.clear();
     }
+    
+    public void clearStringInclude(ActionEvent event) {
+        includeString = "";
+        Spoonacular.included.clear();
+        includeTA.setText("");
+    }
+    public void clearStringExclude(ActionEvent event) {
+        excludeString = "";
+        Spoonacular.excluded.clear();
+        excludeTA.setText("");
+    }
+
 
 
     /**
