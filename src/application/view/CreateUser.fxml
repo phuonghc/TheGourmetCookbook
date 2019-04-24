@@ -41,12 +41,13 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="createUser" layoutX="375.0" layoutY="509.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #afe7b7;" text="Create Account" />
+            <Button fx:id="createUser" layoutX="414.0" layoutY="509.0" mnemonicParsing="false" onAction="#createUser" style="-fx-background-color: #afe7b7;" text="Create Account" />
             <Label fx:id="error" layoutX="264.0" layoutY="275.0" prefHeight="68.0" prefWidth="300.0" textFill="RED">
                <font>
                   <Font size="50.0" />
                </font></Label>
             <Button fx:id="backHomeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backHome" style="-fx-background-color: #afe7b7;" text="Home" />
+            <Button fx:id="backToLogin" layoutX="283.0" layoutY="509.0" mnemonicParsing="false" onAction="#backLogin" style="-fx-background-color: #afe7b7;" text="Back to Login" />
          </children>
       </Pane>
    </children>

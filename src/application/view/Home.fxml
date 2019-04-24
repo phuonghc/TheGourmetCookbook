@@ -42,12 +42,12 @@
                </font>
             </Label>
             <Button fx:id="logoutButton" layoutX="24.0" layoutY="37.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: ff4949;" text="Log Out" />
-            <ImageView fx:id="profileImage" fitHeight="135.0" fitWidth="100.0" layoutX="350.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-style: solid;">
+            <ImageView fx:id="profileImage" fitHeight="135.0" fitWidth="100.0" layoutX="337.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-style: solid;">
                <image>
                   <Image url="@../../../backgroundPics/user-profile.png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonProfile" alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="135.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Profile">
+            <Button fx:id="buttonProfile" alignment="BOTTOM_CENTER" layoutX="337.0" layoutY="448.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="135.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Profile">
                <font>
                   <Font size="20.0" />
                </font>

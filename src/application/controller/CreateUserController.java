@@ -81,6 +81,11 @@ public class CreateUserController implements Initializable{
      */
     @FXML
     private Button backHomeButton;
+    /**
+     * backToLogin - takes user back to the login page
+     */
+    @FXML
+    private Button backToLogin;
     
     /**
      * createUser - calls all methods that create a user. 
@@ -150,6 +155,21 @@ public class CreateUserController implements Initializable{
     }
     
     /**
+     * backLogin - takes user back to the login scene
+     * @param event - ActionEvent 
+     */
+    @FXML
+    public void backLogin(ActionEvent event) {
+    	try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /**
      * initialize - sets all gui components in the scene
      */
 	@Override
@@ -163,6 +183,7 @@ public class CreateUserController implements Initializable{
 		confirmLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		passwordLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		backHomeButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
+		backToLogin.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 	}
 
 }

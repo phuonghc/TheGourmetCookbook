@@ -36,8 +36,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -73,10 +75,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     @FXML
     private TextField calorieMinTextField;
     @FXML
-    private CheckBox veganCheckBox;
-    @FXML
-    private CheckBox vegetarianCheckBox;
-    @FXML
     private Button searchButton;
     @FXML
     private Button homeButton;
@@ -88,6 +86,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     private @FXML Button excludeClearButton;
     private @FXML TextArea includeTA;
     private @FXML TextArea excludeTA;
+    @FXML private ToggleGroup toggleDiets;
+    @FXML private RadioButton radioVegan;
+    @FXML private RadioButton radioVegetarian;
+    @FXML private RadioButton radioPaleo;
+    @FXML private RadioButton radioKeto;
+    @FXML private RadioButton radioPrimal;
 
     
     static String includeString = "";
@@ -235,13 +239,14 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         if(!calorieMaxTextField.getText().isEmpty()) {
             search += "&maxCalories=" + calorieMaxTextField.getText();
         }
-        
-        if(veganCheckBox.isSelected()) {
-            search += "&diet=vegan";
-        }
-        
-        if(vegetarianCheckBox.isSelected()) {
-            search += "&diet=vegetarian";
+
+        RadioButton selectedRadioButton = (RadioButton) toggleDiets.getSelectedToggle();
+        if( selectedRadioButton != null) {
+        	if( selectedRadioButton.equals(radioVegan) ) search += "&diet=vegan";
+        	else if( selectedRadioButton.equals(radioVegetarian) ) search += "&diet=vegetarian";
+        	else if( selectedRadioButton.equals(radioPaleo) ) search += "&diet=paleo";
+        	else if( selectedRadioButton.equals(radioKeto) ) search += "&diet=keto";
+        	else if( selectedRadioButton.equals(radioPrimal) ) search += "&diet=primal";
         }
         
         search += "&offset=0&number=10";        
