@@ -2,10 +2,19 @@ package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import application.Main;
+import application.model.Ingredient;
+import application.model.Spoonacular;
 import application.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +26,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class ProfileController implements Initializable {
 
@@ -27,6 +40,10 @@ public class ProfileController implements Initializable {
 	private ListView<String> userIntolerancesListView;
 	@FXML
 	private TextField userIntoleranceTextField;
+	@FXML
+	private ComboBox<String> comboBox;
+	
+	private ObservableList<String> intoleranceItems = FXCollections.observableArrayList();
 
 	/**
 	 * This method initializes and displays information related to user intolerance.
@@ -35,14 +52,26 @@ public class ProfileController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		welcomeMessageLabel.setText("Welcome " + User.username);
+		loadListBox();
+	}
+	
+	public void loadListBox() {
 		try {
 			User.userIntolerances.clear();
 			User.loadUserIntolerances();
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
-		userIntolerancesListView.getItems().clear();
-		userIntolerancesListView.getItems().addAll(User.userIntolerances);
+		
+		ArrayList<String> arrIntolerances = new ArrayList<String>();
+		for(String intolerance : User.userIntolerances) {
+			System.out.println(intolerance);
+			arrIntolerances.add(intolerance);
+		}
+		
+		intoleranceItems.clear();
+		intoleranceItems.addAll(arrIntolerances);
+		userIntolerancesListView.setItems(intoleranceItems);
 	}
 	
 	/**
@@ -65,23 +94,20 @@ public class ProfileController implements Initializable {
 	 * This method handles the event that occurs when the Add button is clicked.
 	 * 
 	 * @param event
+	 * @throws IOException 
 	 */
 	@FXML
-	public void handleAdd(ActionEvent event) {
-		// Create and display alert if no user intolerance provided
-		if(userIntoleranceTextField.getText() == null || userIntoleranceTextField.getText().trim().length() == 0) {
-			createAndDisplayAlert(AlertType.ERROR, "Alert", "Input Error!", "Please provide an user intolerance to add.");
-			return;
-		}
-		
+	public void handleAdd(ActionEvent event) throws IOException {		
 		// Create and display alert if user intolerance already exists
-		if(User.userIntolerances.contains(userIntoleranceTextField.getText().trim())) {
+		if(User.userIntolerances.contains(comboBox.getValue().trim())) {
 			createAndDisplayAlert(AlertType.ERROR, "Alert", "Input Error!", "User intolerance already exists.");
 			return;
 		}
 
-		userIntolerancesListView.getItems().add(userIntoleranceTextField.getText().trim());
-		User.userIntolerances.add(userIntoleranceTextField.getText().trim());
+		//Add new User intolerance and save user preferences
+		userIntolerancesListView.getItems().add(comboBox.getValue().trim());
+		User.userIntolerances.add(comboBox.getValue().trim());
+		System.out.println(User.userIntolerances);
 		try {
 			User.saveUserIntolerances();
 		} catch (IOException exception) {
@@ -89,6 +115,26 @@ public class ProfileController implements Initializable {
 		}
 		userIntoleranceTextField.setText(null);
 	}
+	
+	public void handleSearch(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
+        
+        if(event.getCode() == KeyCode.ENTER) {
+            
+        	String all = "";
+            all = userIntoleranceTextField.getText();
+            userIntoleranceTextField.setText("");
+            comboBox.getItems().clear();
+            comboBox.setPromptText("Click here");
+            
+            Spoonacular.ingredientSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete?number=10&query=" + all;
+            
+            Ingredient[] ingredientMatch = Spoonacular.loadIngredients();
+            
+            for(int i = 0; i< ingredientMatch.length; i++) {
+                comboBox.getItems().add(ingredientMatch[i].getName());
+            }
+        }
+    }
 
 	/**
 	 * This method handles the event that occurs when the Recipe button is clicked.
@@ -104,5 +150,11 @@ public class ProfileController implements Initializable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void editListView(MouseEvent event) throws IOException {
+		User.userIntolerances.remove(userIntolerancesListView.getSelectionModel().getSelectedIndex());
+		User.saveUserIntolerances();
+		loadListBox();
 	}
 }

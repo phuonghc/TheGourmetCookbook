@@ -298,7 +298,7 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 				Alert alert = new Alert(AlertType.ERROR);
 	    		alert.setTitle("Alert");
 		        alert.setHeaderText("Input Error!");
-		        alert.setContentText("Username has already saved this recipe!!");
+		        alert.setContentText(User.username + " has already saved this recipe!!");
 		        alert.showAndWait();
 			}
 		}else {
