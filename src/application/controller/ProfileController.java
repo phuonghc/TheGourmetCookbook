@@ -91,7 +91,8 @@ public class ProfileController implements Initializable {
 	}
 
 	/**
-	 * This method handles the event that occurs when the Add button is clicked.
+	 * This method handles the event that occurs when an item
+	 * from the combobox is chosen to add to the listview
 	 * 
 	 * @param event
 	 * @throws IOException 
@@ -116,6 +117,15 @@ public class ProfileController implements Initializable {
 		userIntoleranceTextField.setText(null);
 	}
 	
+	/**
+	 * This method displays matching ingredients from the text field
+	 * for the user to select
+	 * @param event
+	 * @throws UnirestException
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	public void handleSearch(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
         
         if(event.getCode() == KeyCode.ENTER) {

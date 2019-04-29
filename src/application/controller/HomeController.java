@@ -139,7 +139,6 @@ public class HomeController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MainTitleLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 75));
 		SearchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
-		//changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));
 		if( User.isLoggedIn()) {
 			changingButton.setText("Saved Recipes");
 			File file = new File("@../../backgroundPics/iconfinder_book_285636.png");

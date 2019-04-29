@@ -1,5 +1,13 @@
 package application.model;
 
+/**
+ * The Recipes are returned in the Get Recipe Information
+ * API search and provide details of the recipe.
+ * @author Harrison Luko
+ * 
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
 import java.util.ArrayList;
 
 public class Recipe {

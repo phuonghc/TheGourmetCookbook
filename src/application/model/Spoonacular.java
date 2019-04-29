@@ -1,5 +1,13 @@
 package application.model;
-
+/**
+ * The Spoonacular class makes all calls to the API
+ * using Jackson object mapping to create objects from the
+ * JSON nodes returned
+ * 
+ * @author Harrison Luko bqr789
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,6 +35,16 @@ public class Spoonacular {
 	
 	public static String[] id = new String[3];
 	
+	/**
+	 * Autocomplete Ingredient search using the text field string provided
+	 * to return a list of ingredients
+	 * 
+	 * @return
+	 * @throws UnirestException
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	public static Ingredient[] loadIngredients() throws UnirestException, JsonParseException, JsonMappingException, IOException {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -40,15 +58,19 @@ public class Spoonacular {
 		
 		String parse = response.getBody().toString(); 
 		Ingredient[] ingredients = objectMapper.readValue(parse, Ingredient[].class);
-		
-		
-		//for(int i = 0; i< ingredients.length;i++) {
-		//	System.out.println(ingredients[i].getTitle());
-		//}
 
 		return ingredients;
 	}
 	
+	/**
+	 * Search Recipe Complex using the search pages inputs
+	 * to return a Menu of menu items loaded into the menu page.
+	 * @return
+	 * @throws UnirestException
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	public static Menu loadMenu() throws UnirestException, JsonParseException, JsonMappingException, IOException {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -63,15 +85,18 @@ public class Spoonacular {
 		String parse = response.getBody().toString(); 
 		Menu menu = objectMapper.readValue(parse, Menu.class);
 		
-		//for(int i = 0; i < menu.getTotalResults(); i++) {
-		//	System.out.println(menu.getResults().get(i).getImage());
-		//	System.out.println(menu.getResults().get(i).getId());
-		//	System.out.println(menu.getResults().get(i).getTitle());
-		//}
-		
 		return menu;
 	}
 	
+	/**
+	 * Get Recipe Information to load the Recipe into the recipe page
+	 * 
+	 * @return
+	 * @throws UnirestException
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
 	public static Recipe loadRecipe() throws UnirestException, JsonParseException, JsonMappingException, IOException {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -85,22 +110,7 @@ public class Spoonacular {
 		
 		String parse = response.getBody().toString(); 
 		Recipe recipe = objectMapper.readValue(parse, Recipe.class);
-		
-		/*
-		System.out.println(recipe.getTitle());
-		
-		System.out.println(parse);
-		
-		for(int i = 0; i < recipe.getExtendedIngredients().size(); i++) {
-			System.out.println(recipe.getExtendedIngredients().get(i).getUnit());
-		}
-		
-		for(int i = 0; i <recipe.getAnalyzedInstructions().size(); i++) {
-			for(int j = 0; j < recipe.getAnalyzedInstructions().get(i).getSteps().size(); j++){
-				//System.out.println(recipe.getAnalyzedInstructions().get(i).getSteps().get(j).getStep());	
-			}
-		}	
-		*/
+
 		return recipe;
 	}
 }

@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
 	     */
 	    @FXML
 	    private Button createUser;
-	    /*
+	    /**
 	     * LoginButton - calls login methods and changed scenes. 
 	     */
 	    @FXML
@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
 
 	/**
 	 * handleLogin - this will call the login methods and switch 
-	 * scene.
+	 * scene, update current User with profile data
 	 * @param event - ActionEvent
 	 */
 	public void handleLogin(ActionEvent event) {
@@ -89,9 +89,6 @@ public class LoginController implements Initializable {
 				Main.stage.setScene(new Scene(root, 800, 800));
 				Main.stage.show();
 			}else {
-//				error.setText("Username or Pasword is incorrect!");
-//				error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 28));
-//				error.setStyle("-fx-background-color: #ffffff");
 				Alert alert = new Alert(AlertType.ERROR);
 		        alert.setTitle("Alert");
 		        alert.setHeaderText("Input Error!");
@@ -143,10 +140,5 @@ public class LoginController implements Initializable {
 		backHome.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		LoginButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
 		createUser.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 15));
-		
-		
 	}
-
-	
-
 }

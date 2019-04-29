@@ -1,7 +1,15 @@
 package application.controller;
 
-
-
+/**
+ * 
+ * The search page allows the user to customize
+ * a meal seach with varying text fields check boxes
+ * and comboboxes before concatenating a string
+ * 
+ * Phuong Huynh
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,9 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-
 import java.util.ResourceBundle;
-
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -46,11 +52,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 
-
-
-
 public class SearchController implements EventHandler<ActionEvent>, Initializable {
-
 
     @FXML
     private TextField categoryTextField;
@@ -94,6 +96,10 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     @FXML private RadioButton radioPrimal;
 
     
+    /**
+     * this thread begins to load the result from the api call
+     * and upon completion takes the user to the Menu page.
+     */
     static String includeString = "";
     static String excludeString = "";
     
@@ -122,7 +128,10 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
 		}
 	}); 
       
-    
+    /**
+     * Initialize the search page to include prepopulated comboboxes
+     * with user options for courses and cuisines.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -278,6 +287,9 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     	//loadingImage.setVisible(true);
     }
     
+    /**
+     * resets the user selected items
+     */
     public static void resetValues() {
         includeString = "";
         excludeString = "";
@@ -285,57 +297,65 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         Spoonacular.excluded.clear();
     }
     
+    /**
+     * resets the user selected included items
+     */
     public void clearStringInclude(ActionEvent event) {
         includeString = "";
         Spoonacular.included.clear();
         includeTA.setText("");
     }
+    
+    /**
+     * resets the user selected excluded items
+     */
     public void clearStringExclude(ActionEvent event) {
         excludeString = "";
         Spoonacular.excluded.clear();
         excludeTA.setText("");
     }
-
-
-
-    /**
-     * This function goes back to the home page
-     * @param event - When user clicks on "Home"
-     */
-    public void handleHome(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-            Main.stage.setScene(new Scene(root, 800, 800));
-            Main.stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
     
+    /**
+     * This method uses the text field to search
+     * for similar worded food groups.
+     * @param event
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws UnirestException
+     * @throws IOException
+     */
     public void onCategoryEvent(KeyEvent event) throws JsonParseException, JsonMappingException, UnirestException, IOException {
         
         if(event.getCode() == KeyCode.ENTER) {
-            
             String all = categoryTextField.getText();
-            
             categoryComboBox.getItems().clear();
-            
             Spoonacular.ingredientSearch = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/autocomplete?number=10&query=" + all;
-            
             Ingredient[] ingredientMatch = Spoonacular.loadIngredients();
-            
             for(int i = 0; i< ingredientMatch.length; i++) {
                 categoryComboBox.getItems().add(ingredientMatch[i].getTitle());
             }
         }
     }
     
+    /**
+     * sets the combobox with foods returned from API
+     * @param event
+     */
     public void setCategory(ActionEvent event) {
         categoryComboBox.setValue(categoryComboBox.getValue());
         //update the category combo box's text field to match chosen value
         categoryTextField.setText(categoryComboBox.getValue());
     }
     
+    /**
+     * This method uses the text field to search
+     * for similar worded ingredients.
+     * @param event
+     * @throws UnirestException
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public void onIncludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
         
         if(event.getCode() == KeyCode.ENTER) {
@@ -357,6 +377,11 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
     }
     
+    /**
+     * Adds the selected item from the combobox for
+     * ingredients to include in search
+     * @param event
+     */
     public void addIncluded(ActionEvent event) {
         if(includeComboBox.getValue()!=null) {
         	String temp = includeComboBox.getValue();
@@ -370,6 +395,15 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
     }
     
+    /**
+     * This method uses the text field to search
+     * for similar worded ingredients. 
+     * @param event
+     * @throws UnirestException
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public void onExcludeEvent(KeyEvent event)  throws UnirestException, JsonParseException, JsonMappingException, IOException {
         
         if(event.getCode() == KeyCode.ENTER) {
@@ -391,6 +425,11 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
     }
     
+    /**
+     * Adds the selected item from the combobox for
+     * ingredients to include in search
+     * @param event
+     */
     public void addExcluded(ActionEvent event) {
     	if(excludeComboBox.getValue()!=null) {
             //update static String value
@@ -403,9 +442,18 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }        
     }
     
+    /**
+     * returns to the home page
+     */
     @Override
     public void handle(ActionEvent arg0) {
-        // TODO Auto-generated method stub
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+            Main.stage.setScene(new Scene(root, 800, 800));
+            Main.stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         
     }
 }

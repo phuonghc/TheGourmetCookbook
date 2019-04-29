@@ -60,7 +60,7 @@ public class MenuController implements Initializable {
 	private ToggleGroup toggleGroup;
 
 	/**
-	 * This method initializes and displays information related to menu.
+	 * This method initializes and displays information related to menu
 	 * 
 	 */
 	@Override
@@ -73,6 +73,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method initializes and displays information related to menu
+	 * from User saved recipes
+	 * 
+	 */
 	private void savedInit() {
 		itemsPerPage = 5;
 		toggleGroup = new ToggleGroup();
@@ -105,9 +110,13 @@ public class MenuController implements Initializable {
 		        return null;
 		    }
 		});
-		
 	}
 
+	/**
+	 * This method initializes and displays information related to menu
+	 * from a custom search
+	 * 
+	 */
 	private void searchInit() {
 		// TODO Auto-generated method stub
 		// Populate the scene with the Menu

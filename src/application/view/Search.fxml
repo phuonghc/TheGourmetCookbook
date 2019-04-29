@@ -57,7 +57,7 @@
             <FXCollections fx:factory="observableArrayList" />
       </items>
     </ComboBox>
-    <Button fx:id="homeButton" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FF4949;" text="HOME" />
+    <Button fx:id="homeButton" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#handle" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FF4949;" text="HOME" />
       <Label alignment="CENTER" layoutX="415.0" layoutY="570.0" prefHeight="30.0" prefWidth="179.0" text="Optional Diet Choices" textAlignment="CENTER" textFill="#0d0d0d" wrapText="true">
       <font>
         <Font size="12.0" fx:id="x1" />

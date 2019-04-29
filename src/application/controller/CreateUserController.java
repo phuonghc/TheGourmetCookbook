@@ -1,5 +1,6 @@
 /**
- * CreateUserController - controller that controls the user scene
+ * CreateUserController - controller allows
+ * Users to create a new profile
  * Application Programming Spring 2019 
  * The Gourmet Cookbook 
  * @author Marco Zamora - bld783
@@ -96,18 +97,12 @@ public class CreateUserController implements Initializable{
     	int result = User.createNewAccount(username.getText(),password.getText(),confirmPassword.getText());
     	
     		if(result == 3) {
-//    			error.setText("Passwords fields don't match!");
-//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 26));
-//    			error.setStyle("-fx-background-color: #ffffff");
     			Alert alert = new Alert(AlertType.ERROR);
     	        alert.setTitle("Alert");
     	        alert.setHeaderText("Input Error!");
     	        alert.setContentText("Password fields don't match!");
     	        alert.showAndWait();
     		}else if(result == 2) {
-//    			error.setText("User already exist!");
-//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
-//    			error.setStyle("-fx-background-color: #ffffff");
     			Alert alert = new Alert(AlertType.ERROR);
     	        alert.setTitle("Alert");
     	        alert.setHeaderText("Input Error!");
@@ -127,9 +122,6 @@ public class CreateUserController implements Initializable{
     				e.printStackTrace();
     			}
     		}else {
-//    			error.setText("Couldn't make user!");
-//    			error.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 40));
-//    			error.setStyle("-fx-background-color: #ffffff");
     			Alert alert = new Alert(AlertType.ERROR);
     	        alert.setTitle("Alert");
     	        alert.setHeaderText("Input Error!");

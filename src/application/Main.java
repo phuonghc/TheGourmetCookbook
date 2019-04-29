@@ -1,5 +1,13 @@
 package application;
 
+/**
+ * The gourmet cookbook uses an API interface
+ * to retrieve recipes from the web. Each search
+ * can be customized by ingredients, genre and
+ * nutrition. 
+ * 
+ * @author Harrison Luko bqr789
+ */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

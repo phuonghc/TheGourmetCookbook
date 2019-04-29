@@ -66,6 +66,10 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	private double initialSliderValue = 0;
 	private Recipe currentRecipe = null;
 
+	/**
+	 * Initialize the recipe page with the instructions
+	 * and ingredients returned from the menu item selected
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -88,12 +92,9 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 				if( s.contentEquals(Spoonacular.recipeSearch)){
 					saveRecipe.disableProperty();
 				}
-			}	
-		} else {
-			
+			}
 		}
-	}
-			
+	}	
 
 	/**
 	 * Changes the view back to the previous view without having to go through search again when an event is detected
@@ -109,29 +110,21 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * Changes the view depending on User status, whether they are logged in, or not, when an event is detected
 	 * @param event
 	 */
 	public void handleLogout(ActionEvent event) {
-		if(!User.isLoggedIn()) {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-				Main.stage.setScene(new Scene(root, 800, 800));
-				Main.stage.show();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-				Main.stage.setScene(new Scene(root, 800, 800));
-				Main.stage.show();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+			Main.stage.setScene(new Scene(root, 800, 800));
+			Main.stage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * This method acquires the new value of the Slider once the User has released the mouse, it then calls other methods
 	 * to use the information
@@ -241,20 +234,8 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 		}
 		ingredientItems.addAll(arrIngredients);
 		listRecipeIngredients.setItems(ingredientItems);
-		
-		/* This will hopefully let me edit the font size within the list view
-		if( !listRecipeIngredients.getItems().isEmpty())
-        {
-            VirtualFlow<?> ch=(VirtualFlow<?>) listRecipeIngredients.getChildrenUnmodifiable();
-            Font anyfont=new Font("Tahoma",16);
-            for (int i = 0; i < ch.getCellCount(); i++)
-            {
-                Cell<String> cell= ch.getCell(i);
-                cell.setFont(anyfont);
-            }
-        }
-        */
 	}
+	
 	/**
 	 * This method populates TextArea with Instructions required	
 	 * @param recipe
@@ -280,6 +261,12 @@ public class RecipeController implements EventHandler<ActionEvent>, Initializabl
 	public void popLabelRecipeName( Recipe recipe) { 
 		labelRecipeName.setText(recipe.getTitle());
 	}
+	
+	/**
+	 * This method handles the saved recipe buttons
+	 * and saves the recipe if logged in, otherwise
+	 * sends the user to the login page
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		if(User.loggedIn) {
