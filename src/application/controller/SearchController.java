@@ -199,12 +199,12 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
         
         if(!excludeString.isEmpty()) { 
-            String temp2 = "";
+            String temp = "";
             String tokens2[] = excludeString.split(",");
-            for (String value2 : tokens2 ) {
+            for (String value : tokens2 ) {
                 //Add the word (without spaces) to the arraylist
-                temp2 = value2.replaceAll(" ", "+");
-                Spoonacular.excluded.add(temp2);
+                temp = value.replaceAll(" ", "+");
+                Spoonacular.excluded.add(temp);
             }
             
             search += "&excludeIngredients=";
@@ -214,8 +214,23 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
                     search += excludes + "%2c";
                 else
                     search += excludes + "+%2c";
-            }
-            
+            }            
+        }
+        
+        if(User.isLoggedIn()) {
+        	System.out.println("YES");
+        	if(User.userIntolerances.size()>0) {
+        		System.out.println("HOORAH");
+        		search += "&intolerances=";
+        		for(int i = 0; i< User.userIntolerances.size(); i++) {
+        			String temp = "";
+        			temp = User.userIntolerances.get(i).replaceAll(" ", "+");
+        			if (i == 0)
+                        search += temp + "%2c";
+                    else
+                        search += temp + "+%2c";
+        		}
+        	}
         }
         
         if(courseComboBox.getValue()!=null) {

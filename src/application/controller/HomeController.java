@@ -62,8 +62,6 @@ public class HomeController implements Initializable{
 	@FXML
 	void handleLogin(ActionEvent event) {
 		
-		System.out.println(User.isLoggedIn());
-		
 		if(!User.isLoggedIn()) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));

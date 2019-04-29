@@ -77,6 +77,7 @@ public class LoginController implements Initializable {
 				User.setUsername(userNameField.getText());
 				User.setPassword(passwordField.getText());
 				User.setLoggedIn(true);
+				User.loadUserIntolerances();
 				User.getUserRecipes().clear();
 				User.loadUserSavedRecipes();
 				if(!User.getTemp().isEmpty()) {
