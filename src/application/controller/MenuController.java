@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import application.Main;
-import application.model.Menu;
 import application.model.MenuItem;
 import application.model.Recipe;
 import application.model.Spoonacular;
@@ -79,6 +78,15 @@ public class MenuController implements Initializable {
 	 * 
 	 */
 	private void savedInit() {
+		if (User.getUserRecipes() == null || User.getUserRecipes().size() == 0) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Alert");
+	        alert.setHeaderText("No Item Warning!");
+	        alert.setContentText("No saved recipe found for the user.");
+	        alert.showAndWait();
+	        return;
+		}
+		
 		itemsPerPage = 5;
 		toggleGroup = new ToggleGroup();
 		Spoonacular.recipeSearch = null;
@@ -118,10 +126,19 @@ public class MenuController implements Initializable {
 	 * 
 	 */
 	private void searchInit() {
-		// TODO Auto-generated method stub
 		// Populate the scene with the Menu
 		try {
 			Spoonacular.menu = Spoonacular.loadMenu();
+			
+			if (Spoonacular.menu == null || Spoonacular.menu.getResults() == null || Spoonacular.menu.getResults().size() == 0) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Alert");
+		        alert.setHeaderText("No Item Warning!");
+		        alert.setContentText("No menu found with given search criteria.");
+		        alert.showAndWait();
+		        return;
+			}
+			
 			itemsPerPage = 5;
 			toggleGroup = new ToggleGroup();
 			Spoonacular.recipeSearch = null;
