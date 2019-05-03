@@ -50,8 +50,6 @@ public class Spoonacular {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		
-		System.out.println(Spoonacular.ingredientSearch);
-		
 		HttpResponse<JsonNode> response = Unirest.get(Spoonacular.ingredientSearch)
 			.header("X-RapidAPI-Key", "9e51cc9475msh268e855537a8f53p10c371jsn1f5fe43b5541")
 			.asJson();
@@ -75,8 +73,6 @@ public class Spoonacular {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		
-		System.out.println(Spoonacular.menuSearch);
 	
 		HttpResponse<JsonNode> response = Unirest.get(Spoonacular.menuSearch)
 			.header("X-RapidAPI-Key", "9e51cc9475msh268e855537a8f53p10c371jsn1f5fe43b5541")
@@ -101,8 +97,6 @@ public class Spoonacular {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		
-		System.out.println(Spoonacular.recipeSearch);
 		
 		HttpResponse<JsonNode> response = Unirest.get(Spoonacular.recipeSearch)
 			.header("X-RapidAPI-Key", "9e51cc9475msh268e855537a8f53p10c371jsn1f5fe43b5541")

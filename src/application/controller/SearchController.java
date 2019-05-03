@@ -106,8 +106,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     Thread th = new Thread( new Task(){
 		@Override
 		protected String call() throws Exception {
-			
-			System.out.println("NO");
 
 		 	Spoonacular.menu = Spoonacular.loadMenu();
 		 	

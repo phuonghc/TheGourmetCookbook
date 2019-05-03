@@ -1,5 +1,13 @@
 package application.controller;
 
+/**
+ * This is profile controller class.
+ * 
+ * @author Chris Aguirre
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

@@ -1,5 +1,12 @@
 package application.controller;
 
+/**
+ * This is profile controller class.
+ * 
+ * @author Sayontani Ray (pek684)
+ * UTSA CS 3443 - Team Project
+ * Spring 2019
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -69,7 +76,6 @@ public class ProfileController implements Initializable {
 		
 		ArrayList<String> arrIntolerances = new ArrayList<String>();
 		for(String intolerance : User.userIntolerances) {
-			System.out.println(intolerance);
 			arrIntolerances.add(intolerance);
 		}
 		
@@ -112,7 +118,6 @@ public class ProfileController implements Initializable {
 		//Add new User intolerance and save user preferences
 		userIntolerancesListView.getItems().add(comboBox.getValue().trim());
 		User.userIntolerances.add(comboBox.getValue().trim());
-		System.out.println(User.userIntolerances);
 		try {
 			User.saveUserIntolerances();
 		} catch (IOException exception) {
