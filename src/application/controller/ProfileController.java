@@ -55,6 +55,10 @@ public class ProfileController implements Initializable {
 		loadListBox();
 	}
 	
+	/**
+	 * This method initializes and loads list of user intolerances.
+	 * 
+	 */
 	public void loadListBox() {
 		try {
 			User.userIntolerances.clear();
@@ -162,6 +166,12 @@ public class ProfileController implements Initializable {
 		}
 	}
 	
+	/**
+	 * This method handles the event that occurs when the item in list view is clicked.
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void editListView(MouseEvent event) throws IOException {
 		User.userIntolerances.remove(userIntolerancesListView.getSelectionModel().getSelectedIndex());
 		User.saveUserIntolerances();
