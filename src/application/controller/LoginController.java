@@ -120,7 +120,7 @@ public class LoginController implements Initializable {
 	 * @param event - ActionEvent
 	 */
 	@FXML
-    void createUser(ActionEvent event) {
+    public void createUser(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/CreateUser.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));

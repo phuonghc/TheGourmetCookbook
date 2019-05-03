@@ -16,7 +16,7 @@
   <!-- TODO Add Nodes -->
   <children>
       <ImageView fx:id="backgroundPic" fitHeight="800.0" fitWidth="800.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="190.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="437.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="192.0" layoutY="153.0" stroke="BLACK" strokeType="INSIDE" width="437.0" />
     <ComboBox id="comboBox" fx:id="includeComboBox" focusTraversable="true" layoutX="204.0" layoutY="427.0" onAction="#addIncluded" opacity="1.0" prefHeight="30.0" prefWidth="200.0" promptText="Include" visible="true">
       <items>
             <FXCollections fx:factory="observableArrayList" />
@@ -97,11 +97,6 @@
       </font>
     </Label>
     <Label font="$x1" layoutX="204.0" layoutY="356.0" prefHeight="30.0" prefWidth="409.0" text="Type in ingredients you want or don't want and press Enter! (optional)" textFill="$x2" wrapText="true" />
-    <ImageView fx:id="loadingImage" fitHeight="327.0" fitWidth="436.0" layoutX="182.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" visible="false" x="0.0" y="125.0">
-      <image>
-        <Image url="@../../../backgroundPics/giphy.gif" />
-      </image>
-    </ImageView>
       <GridPane alignment="CENTER" layoutX="427.0" layoutY="606.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -127,5 +122,10 @@
             <Insets />
          </opaqueInsets>
       </GridPane>
+    <ImageView fx:id="loadingImage" fitHeight="800.0" fitWidth="800.0" layoutY="-125.0" pickOnBounds="true" preserveRatio="true" visible="false" x="0.0" y="125.0">
+      <image>
+        <Image url="@../../../backgroundPics/source.gif" />
+      </image>
+    </ImageView>
   </children>
 </AnchorPane>

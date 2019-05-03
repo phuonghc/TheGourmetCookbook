@@ -284,7 +284,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
     	
         //Show the loadingImage while thread does work
         //*********commented out GIF
-    	//loadingImage.setVisible(true);
+    	loadingImage.setVisible(true);
     }
     
     /**

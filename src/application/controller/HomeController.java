@@ -39,17 +39,32 @@ public class HomeController implements Initializable{
     @FXML
     private Button SearchButton;
     /**
-     * LogingButton - this button takes the user
-     * to the login scene. 
+     * changingButton - changes purpose depending on 
+     * if the user has logged in successfully. 
      */
     @FXML
     private Button changingButton;
+    /**
+     *changingImage - changes images depending on 
+     * if the user has logged in successfully.
+     */
     @FXML
     private ImageView changingImage;
+    /**
+     * logoutButton - this button when pressed will logout the 
+     * user, and take them to the default menu screen. 
+     */
     @FXML
     private Button logoutButton;
+    /**
+     * profileImage - this image view will hold the profile picture of 
+     * logged in user. 
+     */
     @FXML
     private ImageView profileImage;
+    /**
+     * buttonProfile - this button will lead to a users profile. 
+     */
     @FXML
     private Button buttonProfile;
 
@@ -60,7 +75,7 @@ public class HomeController implements Initializable{
      * @param event - ActionEvent
      */
 	@FXML
-	void handleLogin(ActionEvent event) {
+	public void handleLogin(ActionEvent event) {
 		
 		if(!User.isLoggedIn()) {
 			try {
@@ -104,7 +119,7 @@ public class HomeController implements Initializable{
 	 * @param event - ActionEvent
 	 */
 	@FXML
-    void logout(ActionEvent event) {
+    public void logout(ActionEvent event) {
 		User.logout();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
@@ -133,7 +148,7 @@ public class HomeController implements Initializable{
 	}
 	
 	/**
-	 * initialize - this method initializes all gui components.
+	 * initialize - this method initializes all GUI components.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -141,7 +156,7 @@ public class HomeController implements Initializable{
 		SearchButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 23));
 		if( User.isLoggedIn()) {
 			changingButton.setText("Saved Recipes");
-			File file = new File("@../../backgroundPics/iconfinder_book_285636.png");
+			File file = new File("./backgroundPics/iconfinder_book_285636.png");
 			Image image = new Image(file.toURI().toString());
 			changingImage.setImage(image);
 			changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 16));
@@ -150,7 +165,7 @@ public class HomeController implements Initializable{
 			profileImage.setVisible(false);
 			buttonProfile.setVisible(false);
 			changingButton.setText("Login");		
-			File file = new File("@../../backgroundPics/chef.png");
+			File file = new File("./backgroundPics/chef.png");
 			Image image = new Image(file.toURI().toString());
 			changingImage.setImage(image);
 			changingButton.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 18));

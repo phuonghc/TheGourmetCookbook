@@ -59,7 +59,7 @@ public class UserController implements Initializable{
      * @param event - ActionEvent
      */
     @FXML
-    void savedRecipes(ActionEvent event) {
+    public void savedRecipes(ActionEvent event) {
     	
     	if(User.getUserRecipes().size() < 1) {	
     		Alert alert = new Alert(AlertType.ERROR);
@@ -85,7 +85,7 @@ public class UserController implements Initializable{
      * @param event - ActionEvent
      */
     @FXML
-    void handleSearch(ActionEvent event) {
+    public void handleSearch(ActionEvent event) {
     	try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Search.fxml"));
 			Main.stage.setScene(new Scene(root, 800, 800));
@@ -111,7 +111,7 @@ public class UserController implements Initializable{
 	 * @param event - ActionEvent
 	 */
 	@FXML
-    void logout(ActionEvent event) {
+    public void logout(ActionEvent event) {
 		User.logout();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/Home.fxml"));

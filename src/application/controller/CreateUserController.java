@@ -93,7 +93,7 @@ public class CreateUserController implements Initializable{
      * @param event - ActionEvent
      */
     @FXML
-    void createUser(ActionEvent event) {
+    public void createUser(ActionEvent event) {
     	int result = User.createNewAccount(username.getText(),password.getText(),confirmPassword.getText());
     	
     		if(result == 3) {
@@ -166,9 +166,6 @@ public class CreateUserController implements Initializable{
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		username.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
-		password.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
-		confirmPassword.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		createUser.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));
 		title.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 60));
 		userLabel.setFont(Font.loadFont("file:./Fonts/KGDoYouLoveMe.ttf", 20));

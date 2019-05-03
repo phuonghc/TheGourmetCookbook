@@ -15,9 +15,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class User {
-
+	/**
+	 * loggedIn - boolean value that tells the 
+	 * application whether a user in logged in.
+	 */
 	public static boolean loggedIn;
-	
+	/**
+	 * viewSaved - boolean value that tells the application
+	 * whether the application )
+	 */
 	public static boolean viewSaved;
 
 	/**
