@@ -187,7 +187,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
         
         if(!includeString.isEmpty()) { 
-        	System.out.println("inside include String");
             String temp = "";
             String tokens[] = includeString.split(",");
             for (String value : tokens ) {
@@ -225,9 +224,7 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         }
         
         if(User.isLoggedIn()) {
-        	System.out.println("YES");
         	if(User.userIntolerances.size()>0) {
-        		System.out.println("HOORAH");
         		search += "&intolerances=";
         		for(int i = 0; i< User.userIntolerances.size(); i++) {
         			String temp = "";
@@ -243,7 +240,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
         if(courseComboBox.getValue()!=null) {
             String type = courseComboBox.getValue();
             type = type.replaceAll(" ", "+");
-            System.out.println(type);
             search += "&type=" + type;
         }
 
@@ -387,7 +383,6 @@ public class SearchController implements EventHandler<ActionEvent>, Initializabl
                 includeString += ", " + temp;
             else
                 includeString += temp;      
-            System.out.println(includeString);
             includeTA.setText(includeString); 
             includeComboBox.show();
         }
